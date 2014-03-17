@@ -128,7 +128,7 @@ module.exports = function(grunt) {
 			},
 
 			js: {
-				files: ['uncompressed/*.js'], // watch all js files for changes
+				files: ['uncompressed-js/*.js'], // watch all js files for changes
 				tasks: ['jayessy'] // when changes -> do all defined tasks
 			},
 
