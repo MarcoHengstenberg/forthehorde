@@ -1,0 +1,20 @@
+{
+	"name" : "Projectname",
+	"version" : "0.1.0",
+	"description": "Description of the project",
+	"author" : "Marco Kunz",
+	"private" : "true",
+
+	"devDependencies" : {
+		"grunt" : "~0.4.0",
+		"grunt-htmlhint": "*",
+		"grunt-contrib-less" : "*",
+		"grunt-autoprefixer" : "*",
+		"grunt-contrib-cssmin" : "*",
+		"grunt-contrib-concat" : "*",
+		"grunt-contrib-uglify" : "*",
+		"grunt-contrib-imagemin": "*",
+		"grunt-contrib-watch" : "*",
+		"matchdep" : "*"
+	}
+}
