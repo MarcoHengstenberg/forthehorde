@@ -7,11 +7,11 @@ May it be useful for each and everyone around the world. I have commented on as 
 
 **Table of Contents:**
 
-- [Grunt](#Grunt)
-- [LESStoCSS Workflow](#LESStoCSS-Workflow)
-- [Javascript Workflow](#Javascript-Workflow)
-- [Image Compression](#Image-Compression)
-- [The Index.html](#The-Index.html)
+- [Grunt](#grunt)
+- [LESStoCSS Workflow](#lesstocss)
+- [Javascript Workflow](#javascript-workflow)
+- [Image Compression](#image-compression)
+- [The Index.html](#the-indexhtml)
 
 ### Grunt
 
