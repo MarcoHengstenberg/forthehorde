@@ -36,7 +36,7 @@ module.exports = function(grunt) {
 				},
 
 				files: {
-					'less/projectname-atf.css' : 'less/atf/combined-projectname-atf.less' // create a css file out of the given less file
+					'less/projectname-atf.css' : 'less/atf/combined-projectname-atf.less' // create the "above-the-fold" Stylesheet
 				}
 			},
 
@@ -47,7 +47,18 @@ module.exports = function(grunt) {
 				},
 
 				files: {
-					'less/projectname-main.css' : 'less/main/combined-projectname-main.less' // create a css file out of the given less file
+					'less/projectname-main.css' : 'less/main/combined-projectname-main.less' // create the main Stylesheet
+				}
+			},
+
+			print: {
+				options: {
+					paths: ['less/print/'], // watch this folder
+					report: true // tell me what happened
+				},
+
+				files: {
+					'less/projectname-print.css' : 'less/print/combined-projectname-main.less' // create a Print Stylesheet
 				}
 			}
 		},
@@ -60,7 +71,7 @@ module.exports = function(grunt) {
 				},
 
 				files: {
-					'less/projectname-atf.css' : 'css/projectname-atf.css'
+					'css/projectname-atf.css' : 'less/projectname-atf.css'
 				}
 			},
 
@@ -70,7 +81,17 @@ module.exports = function(grunt) {
 				},
 
 				files: {
-					'less/projectname-main.css' : 'css/projectname-main.css'
+					'css/projectname-main.css' : 'less/projectname-main.css'
+				}
+			},
+
+			print: {
+				options: {
+					browsers: ['last 3 versions', '> 1%']
+				},
+
+				files: {
+					'css/projectname-print.css' : 'less/projectname-print.css'
 				}
 			}
 		},
@@ -85,6 +106,11 @@ module.exports = function(grunt) {
 			main: {
 				src: 'css/projectname-main.css',
 				dest: 'css/projectname.main.min.css'
+			},
+
+			print: {
+				src: 'css/projectname-print.css',
+				dest: 'css/projectname.print.min.css'
 			}
 		},
 
@@ -162,6 +188,11 @@ module.exports = function(grunt) {
 				tasks: ['lessy-main'] // when changes -> do all defined tasks (see grunt.registerTask 'lessy-main')
 			}
 
+			print: {
+				files: ['less/print/*.less'], // watch all .less files for the print CSS for changes
+				tasks: ['lessy-print'] // when changes -> do all defined tasks (see grunt.registerTask 'lessy-print')
+			}
+
 			js: {
 				files: ['uncompressed-js/*.js'], // watch all separated and unminified js files for changes
 				tasks: ['jayessy'] // when changes -> do all defined tasks
@@ -179,6 +210,7 @@ module.exports = function(grunt) {
 	grunt.registerTask('default', []);
 	grunt.registerTask('lessy-atf', ['less:atf', 'autoprefixer:atf', 'cssmin:atf']);
 	grunt.registerTask('lessy-main', ['less:main', 'autoprefixer:main', 'cssmin:main']);
+	grunt.registerTask('lessy-main', ['less:print', 'autoprefixer:print', 'cssmin:print']);
 	grunt.registerTask('jayessy', ['concat', 'uglify']);
 	grunt.registerTask('imageminify', ['imagemin']); // giving both the same name causes issues
 }

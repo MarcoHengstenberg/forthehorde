@@ -6,7 +6,7 @@
 	<meta charset="UTF-8" />
 	<meta name="viewport" content="width=device-width, initial-scale=1" />
 	<meta name="description" content="Description of the project" />
-	
+
 	<!-- Win8 or Apple, no matter where you're at, you are getting an icon -->
 	<meta name="application-name" content="Projectname" />
 	<meta name="msapplication-TileColor" content="#fff" />
@@ -19,7 +19,11 @@
 	<link rel="apple-touch-icon-precomposed" sizes="72x72" href="images/apple-touch-icon-72x72-precomposed.png" />
 	<link rel="apple-touch-icon-precomposed" sizes="114x114" href="images/apple-touch-icon-114x114-precomposed.png" />
 	<link rel="apple-touch-icon-precomposed" sizes="144x144" href="images/apple-touch-icon-144x144-precomposed.png" />
-	<link rel="shortcut icon" href="images/favicon.ico" />
+
+	<!-- All things Favicon -->
+  <!--[if IE]>
+    <link rel="icon" href="favicon.ico" />
+  <![endif]-->
 	<link rel="icon" type="image/png" href="images/favicon.png" />
 
 	<!-- Social Media Stuff -->
@@ -30,12 +34,8 @@
   <meta property="og:image" content="images/projectname-200x200.jpg" />
   <link rel="image_src" href="images/projectname-200x200.jpg" />
 
-	<!-- Development
-		<link rel="stylesheet" type="text/css" href="css/projectname.css" />
-	-->
-	<!-- Production
-		<link rel="stylesheet" type="text/css" href="css/projectname.min.css" />
-	-->
+  <!-- Inline Styles from the above-the-fold Stylesheet -->
+  <style>/* Above the fold CSS goes here */</style>
 
 	<!--[if lt IE 9]>
   	<script src="//html5shiv.googlecode.com/svn/trunk/html5.js"></script>
@@ -44,10 +44,10 @@
 </head>
 <body>
 
-<!-- Development
+<!-- Development -->
 <script type="text/javascript" src="concatenated/projectname.js"></script>
--->
-<!-- Production 
+
+<!-- Production
 <script type="text/javascript" src="js/projectname.min.js"></script>
 -->
 </body>
