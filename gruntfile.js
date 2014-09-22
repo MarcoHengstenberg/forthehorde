@@ -18,7 +18,10 @@ module.exports = function(grunt) {
           'spec-char-escape': true, // Check for unescaped special characters
           'id-unique': true, // Check for unique IDs, not unique -> kickbandie
           'head-script-disabled': true, // Scripts go to the footer
-          'style-disabled': true // no style tag in the header, only external CSS-files
+
+          /* We are not looking for style in our head as we
+             need that for the critical CSS part. */
+
         },
         src: ['*.html'] // check all HTML files
 	    }
@@ -26,47 +29,74 @@ module.exports = function(grunt) {
 
 		// LESS to CSS Block
 		less: {
-			build: {
+			atf: { // above the fold CSS
 				options: {
-					paths: ['less'], // watch this folder
+					paths: ['less/atf/'], // watch this folder
 					report: true // report in the terminal what you did
 				},
 
 				files: {
-					'css/projectname.css' : 'less/combined-projectname.less' // create a css file out of the given less file
+					'less/projectname-atf.css' : 'less/atf/combined-projectname-atf.less' // create a css file out of the given less file
+				}
+			},
+
+			main: { // Main CSS-File
+				options: {
+					paths: ['less/main/'], // watch this folder
+					report: true // report in the terminal what you did
+				},
+
+				files: {
+					'less/projectname-main.css' : 'less/main/combined-projectname-main.less' // create a css file out of the given less file
 				}
 			}
 		},
 
 		// Autoprefixer Block
 		autoprefixer: {
-			build: {
+			atf: {
 				options: {
 					browsers: ['last 3 versions', '> 1%']
 				},
 
 				files: {
-					'css/projectname.css' : 'css/projectname.css'
+					'less/projectname-atf.css' : 'css/projectname-atf.css'
+				}
+			},
+
+			main: {
+				options: {
+					browsers: ['last 3 versions', '> 1%']
+				},
+
+				files: {
+					'less/projectname-main.css' : 'css/projectname-main.css'
 				}
 			}
 		},
 
 		// CSS Minifier Block
 		cssmin: {
-			build: {
-				src: 'css/projectname.css',
-				dest: 'css/projectname.min.css'
+			atf: {
+				src: 'css/projectname-atf.css',
+				dest: 'css/projectname.atf.min.css'
+			},
+
+			main: {
+				src: 'css/projectname-main.css',
+				dest: 'css/projectname.main.min.css'
 			}
 		},
 
 		// Javascript Concatenation Block
 		concat: {
 			options: {
-				separator: ';',
+				separator: ';', // separate all our scripts with semicolons
 			},
+
 			dist: {
-				src: ['uncompressed-js/*.js'],
-				dest: 'concatenated/projectname.js'
+				src: ['uncompressed-js/*.js'], // take all scripts from this folder
+				dest: 'concatenated/projectname.js' // concatenate them into one and put it here
 			}
 		},
 
@@ -116,25 +146,30 @@ module.exports = function(grunt) {
 			options: {
         livereload: true,
     	},
-			
+
 			html: {
 				files: ['index.html'], // watch index.html for changes
 				tasks: ['htmlhint'] // when changes -> do task
 			},
 
-			css: {
-				files: ['less/*.less'], // watch all .less files for changes
-				tasks: ['lessy'] // when changes -> do all defined tasks (see grunt.registerTask 'lessy')
+			atf: {
+				files: ['less/atf/*.less'], // watch all .less files for the above-the-fold CSS for changes
+				tasks: ['lessy-atf'] // when changes -> do all defined tasks (see grunt.registerTask 'lessy-atf')
 			},
 
+			main: {
+				files: ['less/main/*.less'], // watch all .less files for the main CSS for changes
+				tasks: ['lessy-main'] // when changes -> do all defined tasks (see grunt.registerTask 'lessy-main')
+			}
+
 			js: {
-				files: ['uncompressed-js/*.js'], // watch all js files for changes
+				files: ['uncompressed-js/*.js'], // watch all separated and unminified js files for changes
 				tasks: ['jayessy'] // when changes -> do all defined tasks
 			},
 
 			imagemin: {
 				files: ['raw/*.jpg', 'raw/*.png'], // watch for images with those extensions being put into the raw folder
-				tasks: ['imagemin'] // new images -> do task
+				tasks: ['imageminify'] // new images -> do task
 			}
 		}
 
@@ -142,7 +177,8 @@ module.exports = function(grunt) {
 	});
 
 	grunt.registerTask('default', []);
-	grunt.registerTask('lessy', ['less', 'autoprefixer', 'cssmin']);
+	grunt.registerTask('lessy-atf', ['less:atf', 'autoprefixer:atf', 'cssmin:atf']);
+	grunt.registerTask('lessy-main', ['less:main', 'autoprefixer:main', 'cssmin:main']);
 	grunt.registerTask('jayessy', ['concat', 'uglify']);
-	grunt.registerTask('imagemin', ['imagemin']);
+	grunt.registerTask('imageminify', ['imagemin']); // giving both the same name causes issues
 }

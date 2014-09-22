@@ -2,7 +2,7 @@
 	"name" : "Projectname",
 	"version" : "0.1.0",
 	"description": "Description of the project",
-	"author" : "Marco Kunz",
+	"author" : "Your Name",
 	"private" : "true",
 
 	"devDependencies" : {
