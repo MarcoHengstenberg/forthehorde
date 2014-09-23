@@ -1,7 +1,9 @@
 # For the hooooorde
 ## This is my basic grunt setup for front end development
 
-May it be useful for each and everyone around the world. I have commented on as much as possible and as little as I hope was needed to keep the files from being a comment-mess with no real content.
+First of all: Feel free to open issues, ask questions and tinker with the code to your likes. There is no license whatsoever I added to the game apart from the "Do whatever the f*** you want" license.
+
+May this repo be useful for each and everyone around the world. I have commented on as much as possible and as little as I hope was needed to keep the files from being a comment-mess with no real content.
 
 **Update (23.09.2014):** As I have not come around updating the repo until yesterday since my last deploy in... errr... well... long ago... I have to update the readme, now, as well.
 
