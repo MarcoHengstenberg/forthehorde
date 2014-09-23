@@ -37,9 +37,13 @@
   <!-- Inline Styles from the above-the-fold Stylesheet -->
   <style>/* Above the fold CSS goes here */</style>
 
-	<!--[if lt IE 9]>
-  	<script src="//html5shiv.googlecode.com/svn/trunk/html5.js"></script>
-  <![endif]-->
+  <!-- You don't have JS supported - no big deal -->
+  <noscript>
+    <link href="css/projectname.main.min.css" rel="stylesheet" media="all" />
+    <link href="css/projectname.print.min.css" rel="stylesheet" media="print" />
+  </noscript>
+
+	<!--[if lt IE 9]><script src="//html5shiv.googlecode.com/svn/trunk/html5.js"></script><![endif]-->
 
 </head>
 <body>
