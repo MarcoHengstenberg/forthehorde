@@ -134,6 +134,8 @@ module.exports = function(grunt) {
 
 		// CSS Linting Block
 		csslint: {
+
+			// Options on what throws a warning can be found in the dotfile
 			options: {
 				csslintrc: '.csslintrc'
 			},
@@ -245,7 +247,6 @@ module.exports = function(grunt) {
 				tasks: ['imageminify'] // new images -> do task
 			}
 		}
-
 
 	});
 
