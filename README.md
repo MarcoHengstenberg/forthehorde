@@ -5,6 +5,8 @@ First of all: Feel free to open issues, ask questions and tinker with the code t
 
 May this repo be useful for each and everyone around the world. I have commented on as much as possible and as little as I hope was needed to keep the files from being a comment-mess with no real content.
 
+**Update (24.09.2014):** While I was already on it I added two new tasks to the Grunt Workflow and a new dotfile entered the arena as well. Check it out. May it be useful to you.
+
 **Update (23.09.2014):** As I have not come around updating the repo until yesterday since my last deploy in... errr... well... long ago... I have to update the readme, now, as well.
 
 ### What's in this for me
@@ -27,7 +29,7 @@ I'm using *[Grunt](http://gruntjs.com)* with the following tasks:
 - [less](https://github.com/gruntjs/grunt-contrib-less)
 - [autoprefixer](https://github.com/nDmitry/grunt-autoprefixer)
 - [cssmin](https://github.com/gruntjs/grunt-contrib-cssmin)
-- [csslint])(https://github.com/gruntjs/grunt-contrib-csslint)
+- [csslint](https://github.com/gruntjs/grunt-contrib-csslint)
 - [concat](https://github.com/gruntjs/grunt-contrib-concat)
 - [uglify](https://github.com/gruntjs/grunt-contrib-uglify)
 - [imagemin](https://github.com/gruntjs/grunt-contrib-imagemin)
