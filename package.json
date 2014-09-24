@@ -7,7 +7,6 @@
 
 	"devDependencies" : {
 		"grunt" : "~0.4.0",
-		"grunt-contrib-jade"		: "*",
 		"grunt-htmlhint" 				: "*",
 		"grunt-contrib-htmlmin" : "*",
 		"grunt-contrib-less" 		: "*",

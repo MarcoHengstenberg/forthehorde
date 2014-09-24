@@ -23,9 +23,11 @@ May this repo be useful for each and everyone around the world. I have commented
 I'm using *[Grunt](http://gruntjs.com)* with the following tasks:
 
 - [htmlhint](https://github.com/yaniswang/grunt-htmlhint)
+- [htmlmin](https://github.com/gruntjs/grunt-contrib-htmlmin)
 - [less](https://github.com/gruntjs/grunt-contrib-less)
 - [autoprefixer](https://github.com/nDmitry/grunt-autoprefixer)
 - [cssmin](https://github.com/gruntjs/grunt-contrib-cssmin)
+- [csslint])(https://github.com/gruntjs/grunt-contrib-csslint)
 - [concat](https://github.com/gruntjs/grunt-contrib-concat)
 - [uglify](https://github.com/gruntjs/grunt-contrib-uglify)
 - [imagemin](https://github.com/gruntjs/grunt-contrib-imagemin)
@@ -49,7 +51,7 @@ The good thing here comes with the _watch-task_ making every saved change into a
 
 As every other person I have my way of doing things and therefor this file represents my best measure on how the CSSlint task should do its job. This is something very personal, so alter the settings to your liking.
 
-I added every possible option in there with the ones I want to have a warning set to `true` and `false` where I deem a warning unneccessary or simply not useful. Sometimes I felt very undecided but that's something for a different readme file in a different repository.
+I added every possible option in there – the ones I want to have a warning about are set to `true` and the rest to `false` because I deem a warning unneccessary or simply not useful. Sometimes I felt very undecided but that's something for a different readme file in a different [repository](https://github.com/MarcoKunz/dotfiles#csslintrc).
 
 ### Javascript Workflow
 
@@ -69,7 +71,9 @@ This is handled by the *watch-task* as well, yet with one caveat: You will need 
 
 ### The index.html
 
-This is really only for me myself and I. Whether you might want to use it is completely up to you. Take a look around the head-section to see what's in there for you.
+**What's first, first:** Find the unminified version inside the `unminified-html` directory.
+
+**Apart from that:** This file is really only for me myself and I. Whether you might want to use it is completely up to you. Take a look around the head-section to see what's in there for you.
 
 What should be noted is the part in the head section concerning the infamous favicon. Jonathan T. Neal pointed out in a [blogpost](http://www.jonathantneal.com/blog/understand-the-favicon/) how [incredibly awesome](https://twitter.com/nice2meatu/status/514045061425020928) (not) the favicon actually is. So, after reading his article about this matter I included his suggested way of cross-browser support for a favicon while maintaining a larger PNG version for retina-displays.
 
