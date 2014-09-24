@@ -7,14 +7,17 @@
 
 	"devDependencies" : {
 		"grunt" : "~0.4.0",
-		"grunt-htmlhint": "*",
-		"grunt-contrib-less" : "*",
-		"grunt-autoprefixer" : "*",
-		"grunt-contrib-cssmin" : "*",
-		"grunt-contrib-concat" : "*",
-		"grunt-contrib-uglify" : "*",
+		"grunt-contrib-jade"		: "*",
+		"grunt-htmlhint" 				: "*",
+		"grunt-contrib-htmlmin" : "*",
+		"grunt-contrib-less" 		: "*",
+		"grunt-autoprefixer" 		: "*",
+		"grunt-contrib-cssmin"	: "*",
+		"grunt-contrib-csslint"	: "*",
+		"grunt-contrib-concat"	: "*",
+		"grunt-contrib-uglify"	: "*",
 		"grunt-contrib-imagemin": "*",
-		"grunt-contrib-watch" : "*",
-		"matchdep" : "*"
+		"grunt-contrib-watch" 	: "*",
+		"matchdep" 							: "*"
 	}
 }

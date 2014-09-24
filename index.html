@@ -3,44 +3,45 @@
 <head>
 	<title>Title of the project</title>
 
-	<meta charset="UTF-8" />
-	<meta name="viewport" content="width=device-width, initial-scale=1" />
-	<meta name="description" content="Description of the project" />
-
-	<!-- Win8 or Apple, no matter where you're at, you are getting an icon -->
-	<meta name="application-name" content="Projectname" />
-	<meta name="msapplication-TileColor" content="#fff" />
-	<meta name="msapplication-square70x70logo" content="images/projectname-msapp-70-70.png" />
-	<meta name="msapplication-square150x150logo" content="images/projectname-msapp-150-150.png" />
-	<meta name="msapplication-wide310x150logo" content="images/projectname-msapp-310-150.png" />
-	<meta name="msapplication-square310x310logo" content="images/projectname-msapp-310-310.png" />
-	<link rel="apple-touch-icon-precomposed" href="images/apple-touch-icon-precomposed.png" />
-	<link rel="apple-touch-icon-precomposed" sizes="57x57" href="images/apple-touch-icon-57x57-precomposed.png" />
-	<link rel="apple-touch-icon-precomposed" sizes="72x72" href="images/apple-touch-icon-72x72-precomposed.png" />
-	<link rel="apple-touch-icon-precomposed" sizes="114x114" href="images/apple-touch-icon-114x114-precomposed.png" />
-	<link rel="apple-touch-icon-precomposed" sizes="144x144" href="images/apple-touch-icon-144x144-precomposed.png" />
-
-	<!-- All things Favicon -->
-  <!--[if IE]>
-    <link rel="icon" href="favicon.ico" />
-  <![endif]-->
-	<link rel="icon" type="image/png" href="images/favicon.png" />
-
-	<!-- Social Media Stuff -->
-  <meta property="og:title" content="Title of the project" />
-  <meta property="og:type" content="website" />
-  <meta property="og:url" content="http://www.projectname.com" />
-  <meta property="og:description" content="Description of the project." />
-  <meta property="og:image" content="images/projectname-200x200.jpg" />
-  <link rel="image_src" href="images/projectname-200x200.jpg" />
-
   <!-- Inline Styles from the above-the-fold Stylesheet -->
   <style>/* Above the fold CSS goes here */</style>
 
+	<meta charset="UTF-8" />
+	<meta content="width=device-width, initial-scale=1" name="viewport" />
+	<meta content="Description of the project" name="description" />
+
+	<!-- Win8 or Apple, no matter where you're at, you are getting an icon -->
+	<meta content="Projectname" name="application-name" />
+	<meta content="#fff" name="msapplication-TileColor" />
+	<meta content="images/projectname-msapp-70-70.png" name="msapplication-square70x70logo" />
+	<meta content="images/projectname-msapp-150-150.png" name="msapplication-square150x150logo" />
+	<meta content="images/projectname-msapp-310-150.png" name="msapplication-wide310x150logo" />
+	<meta content="images/projectname-msapp-310-310.png" name="msapplication-square310x310logo" />
+
+  <link href="images/apple-touch-icon-precomposed.png" rel="apple-touch-icon-precomposed" />
+	<link href="images/apple-touch-icon-57x57-precomposed.png" sizes="57x57" rel="apple-touch-icon-precomposed" />
+	<link href="images/apple-touch-icon-72x72-precomposed.png" sizes="72x72" rel="apple-touch-icon-precomposed" />
+	<link href="images/apple-touch-icon-114x114-precomposed.png" sizes="114x114" rel="apple-touch-icon-precomposed" />
+	<link href="images/apple-touch-icon-144x144-precomposed.png" sizes="144x144" rel="apple-touch-icon-precomposed" />
+
+	<!-- All things Favicon -->
+  <!--[if IE]>
+    <link href="favicon.ico" rel="icon" />
+  <![endif]-->
+	<link href="images/favicon.png" rel="icon" />
+
+	<!-- Social Media Stuff -->
+  <meta content="Title of the project" property="og:title" />
+  <meta content="website" property="og:type" />
+  <meta content="http://www.projectname.com" property="og:url" />
+  <meta content="Description of the project." property="og:description" />
+  <meta content="images/projectname-200x200.jpg" property="og:image" />
+  <link href="images/projectname-200x200.jpg" rel="image_src" />
+
   <!-- You don't have JS supported - no big deal -->
   <noscript>
-    <link href="css/projectname.main.min.css" rel="stylesheet" media="all" />
-    <link href="css/projectname.print.min.css" rel="stylesheet" media="print" />
+    <link href="css/projectname.main.min.css" media="all" rel="stylesheet" />
+    <link href="css/projectname.print.min.css" media="print" rel="stylesheet" />
   </noscript>
 
 	<!--[if lt IE 9]><script src="//html5shiv.googlecode.com/svn/trunk/html5.js"></script><![endif]-->
@@ -49,10 +50,10 @@
 <body>
 
 <!-- Development -->
-<script type="text/javascript" src="concatenated/projectname.js"></script>
+<script src="concatenated/projectname.js"></script>
 
 <!-- Production
-<script type="text/javascript" src="js/projectname.min.js"></script>
+<script src="js/projectname.min.js"></script>
 -->
 </body>
 </html>

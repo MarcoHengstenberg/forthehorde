@@ -23,8 +23,26 @@ module.exports = function(grunt) {
              need that for the critical CSS part. */
 
         },
-        src: ['*.html'] // check all HTML files
+
+        src: ['unminified-html/*.html'] // check all HTML files in this directory
 	    }
+		},
+
+		// HTML Minification Block
+		htmlmin: {
+			// mumin stands for "Markup Minification"
+			mumin: {
+				options: {
+					collapseWhitespace: true, // yes, we want exactly that
+					preserveLineBreaks: true, // safety first, can be removed later
+					removeComments: true, // this is already optional but I like it that way
+					keepClosingSlash: true // this is something I always do and want to keep
+				},
+
+				files: {
+					'unminified-html/*.html' : '*.html' // minify HTML files in this directory and place them in the root
+				}
+			}
 		},
 
 		// LESS to CSS Block
@@ -114,6 +132,25 @@ module.exports = function(grunt) {
 			}
 		},
 
+		// CSS Linting Block
+		csslint: {
+			options: {
+				csslintrc: '.csslintrc'
+			},
+
+			atf: {
+				src: 'css/projectname.atf.min.css'
+			},
+
+			main: {
+				src: 'css/projectname.main.min.css'
+			},
+
+			print: {
+				src: 'css/projectname.print.min.css'
+			}
+		},
+
 		// Javascript Concatenation Block
 		concat: {
 			options: {
@@ -174,9 +211,14 @@ module.exports = function(grunt) {
     	},
 
 			html: {
-				files: ['index.html'], // watch index.html for changes
-				tasks: ['htmlhint'] // when changes -> do task
+				files: ['unminified-html/*.html'], // watch all html-files for changes
+				tasks: ['htmlhint'] // when changes -> do lint
 			},
+
+			mumin: {
+				files: ['unminified-html/*.html'], // watch all html-files for changes
+				tasks: ['mumin'] // when changes -> do minify
+			}
 
 			atf: {
 				files: ['less/atf/*.less'], // watch all .less files for the above-the-fold CSS for changes
@@ -208,9 +250,10 @@ module.exports = function(grunt) {
 	});
 
 	grunt.registerTask('default', []);
-	grunt.registerTask('lessy-atf', ['less:atf', 'autoprefixer:atf', 'cssmin:atf']);
-	grunt.registerTask('lessy-main', ['less:main', 'autoprefixer:main', 'cssmin:main']);
-	grunt.registerTask('lessy-main', ['less:print', 'autoprefixer:print', 'cssmin:print']);
+	grunt.registerTask('mumin', ['htmlmin']);
+	grunt.registerTask('lessy-atf', ['less:atf', 'autoprefixer:atf', 'cssmin:atf', 'csslint:atf']);
+	grunt.registerTask('lessy-main', ['less:main', 'autoprefixer:main', 'cssmin:main', 'csslint:main']);
+	grunt.registerTask('lessy-main', ['less:print', 'autoprefixer:print', 'cssmin:print', 'csslint:print']);
 	grunt.registerTask('jayessy', ['concat', 'uglify']);
 	grunt.registerTask('imageminify', ['imagemin']); // giving both the same name causes issues
 }

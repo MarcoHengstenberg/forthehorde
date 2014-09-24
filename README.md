@@ -13,6 +13,7 @@ May this repo be useful for each and everyone around the world. I have commented
 
 - [Grunt](#grunt)
 - [LESStoCSS Workflow](#lesstocss)
+- [.csslintrc](#.csslintrc)
 - [Javascript Workflow](#javascript-workflow)
 - [Image Compression](#image-compression)
 - [The Index.html](#the-indexhtml)
@@ -43,6 +44,12 @@ I separated the critical CSS from the main stylesheet and also extracted the pri
 5. Finally the minified `projectname.suffix.min.css` files are created inside the `css` directory
 
 The good thing here comes with the _watch-task_ making every saved change into a working development file and a minified production version of it.
+
+### .csslintrc
+
+As every other person I have my way of doing things and therefor this file represents my best measure on how the CSSlint task should do its job. This is something very personal, so alter the settings to your liking.
+
+I added every possible option in there with the ones I want to have a warning set to `true` and `false` where I deem a warning unneccessary or simply not useful. Sometimes I felt very undecided but that's something for a different readme file in a different repository.
 
 ### Javascript Workflow
 
