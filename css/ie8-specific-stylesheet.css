@@ -1,0 +1,33 @@
+/*
+  ie8-specific-stylesheet.css
+
+  If you are into that kind of thing...
+*/
+body {
+  /*
+    If I ever get my hands on some down 'n' dirty
+    statistics on what the most used viewport-width
+    for IE8 users may be, I'll stop presuming it is
+    1024 at max.
+  */
+  max-width: 1000px; /* or whatever suits you best */
+
+  margin: 0 auto; /* center that static box of pixels */
+}
+
+/*
+  Now, you may simply overwrite all mobile and desktop
+  styles up to a certain media-query, which will fit
+  into a 1000px wide screen perfectly.
+
+  Keep the leftovers for IE8!
+
+  Done!
+
+  Champagne!
+
+  Always check with Browserstack or "the real thing"
+  after setting up a IE8 specific stylesheet. There still
+  might be some troublesome things going on with your
+  precious design.
+*/

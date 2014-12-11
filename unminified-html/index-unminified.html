@@ -2,13 +2,18 @@
 <html lang="en">
 
   <head>
+    <!--
+        The charset is crucial and has to delivered as soon as possible!
+        If you delay this after the title and your inline styles this will
+        be flagged by a few performance analytics tools.
+    -->
+    <meta charset="UTF-8" />
 
     <title>Title of the project</title>
 
     <!-- Inline Styles from the above-the-fold Stylesheet -->
     <style>/* Above the fold CSS goes here */</style>
 
-    <meta charset="UTF-8" />
     <meta content="width=device-width, initial-scale=1" name="viewport" />
     <meta content="Description of the project" name="description" />
     <!-- And just for good measure and because it's fun to have the discussion
@@ -29,8 +34,6 @@
     <link href="images/apple-touch-icon-72x72-precomposed.png" sizes="72x72" rel="apple-touch-icon-precomposed" />
     <link href="images/apple-touch-icon-114x114-precomposed.png" sizes="114x114" rel="apple-touch-icon-precomposed" />
     <link href="images/apple-touch-icon-144x144-precomposed.png" sizes="144x144" rel="apple-touch-icon-precomposed" />
-
-    <!-- Favicon for whereever it might be used -->
 
     <!-- Favicon for all IE browsers below IE10 -->
     <!--[if IE]>
@@ -55,7 +58,12 @@
       <link href="css/projectname.print.min.css" media="print" rel="stylesheet" />
     </noscript>
 
-    <!--[if lt IE 9]><script src="//html5shiv.googlecode.com/svn/trunk/html5.js"></script><![endif]-->
+    <!-- Entirely optional but better than loading respond.js if you
+    need support for IE8: -->
+    <!--[if lt IE 9]>
+        <link href="ie8-specific-stylesheet.css" type="text/css" media="all" rel="stylesheet" />
+        <script src="//html5shiv.googlecode.com/svn/trunk/html5.js"></script>
+    <![endif]-->
 
   </head>
   <body>
