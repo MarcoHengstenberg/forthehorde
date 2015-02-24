@@ -5,7 +5,9 @@ First of all: Feel free to open issues, ask questions and tinker with the code t
 
 May this repo be useful for each and everyone around the world. I have commented on as much as possible and as little as I hope was needed to keep the files from being a comment-mess with no real content.
 
-**Update (24.09.2014):** While I was already on it I added two new tasks to the Grunt Workflow and a new dotfile entered the arena as well. Check it out. May it be useful to you.
+**Update (24.02.2015):** Had to take care of my indentation and also of the generated index.html file being filled. Makes more sense to leave that empty and to only write stuff in the HTML files inside the *_unminified-html_ folder.
+
+**Update (24.09.2014):** While I was already on it I added two new tasks to the Grunt workflow and a new dotfile entered the arena as well. Check it out. May it be useful to you.
 
 **Update (23.09.2014):** As I have not come around updating the repo until yesterday since my last deploy in... errr... well... long ago... I have to update the readme, now, as well.
 
@@ -15,7 +17,7 @@ May this repo be useful for each and everyone around the world. I have commented
 
 - [Grunt](#grunt)
 - [LESStoCSS Workflow](#lesstocss)
-- [.csslintrc](#.csslintrc)
+- [.csslintrc](#csslintrc)
 - [Javascript Workflow](#javascript-workflow)
 - [Image Compression](#image-compression)
 - [The Index.html](#the-indexhtml)
