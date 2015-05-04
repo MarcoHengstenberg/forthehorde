@@ -5,6 +5,15 @@ First of all: Feel free to open issues, ask questions and tinker with the code t
 
 May this repo be useful for each and everyone around the world. I have commented on as much as possible and as little as I hope was needed to keep the files from being a comment-mess with no real content.
 
+**Update (04.05.2015):** Got rid of unneeded projectfiles, which will be generated as soon as one is working with this Grunt setup. I also added jshint to the workflow and enhanced the uglify task with a beautify task, so I can have both mangled and compressed production-ready files but also beautified JavaScript for debugging purposes. Realized I forgot about some commas and added them as well. Mea Culpa.
+
+After killing different files some folders remained empty thus I added a few `.gitkeep files in there. Kill them or leave them or gitignore them – whatever suits you best.
+
+The `.jshintignore` file ignores all node_modules.
+Lowered the compression level for pngquant. Will have to think of a better option to work on PNG files or may be completely switch to a different Plug-In (TinyPNG looks promising).
+
+I hope I was able to fix a few bugs without introducing new ones.
+
 **Update (24.02.2015):** Had to take care of my indentation and also of the generated index.html file being filled. Makes more sense to leave that empty and to only write stuff in the HTML files inside the *_unminified-html_ folder.
 
 **Update (24.09.2014):** While I was already on it I added two new tasks to the Grunt workflow and a new dotfile entered the arena as well. Check it out. May it be useful to you.

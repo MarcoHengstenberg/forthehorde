@@ -69,50 +69,50 @@ module.exports = function(grunt) {
 				}
 			},
 
-		print: {
-			options: {
-				paths: ['less/print/'], // watch this folder
-				report: true // tell me what happened
-			},
+			print: {
+				options: {
+					paths: ['less/print/'], // watch this folder
+					report: true // tell me what happened
+				},
 
-			files: {
-				'less/projectname-print.css' : 'less/print/combined-projectname-main.less' // create a Print Stylesheet
-			}
-		}
-	},
-
-	// Autoprefixer Block
-	autoprefixer: {
-		atf: {
-			options: {
-				browsers: ['last 3 versions', '> 1%']
-			},
-
-			files: {
-				'css/projectname-atf.css' : 'less/projectname-atf.css'
+				files: {
+					'less/projectname-print.css' : 'less/print/combined-projectname-main.less' // create a Print Stylesheet
+				}
 			}
 		},
 
-		main: {
-			options: {
-				browsers: ['last 3 versions', '> 1%']
+		// Autoprefixer Block
+		autoprefixer: {
+			atf: {
+				options: {
+					browsers: ['last 3 versions', '> 1%']
+				},
+
+				files: {
+					'css/projectname-atf.css' : 'less/projectname-atf.css'
+				}
 			},
 
-			files: {
-				'css/projectname-main.css' : 'less/projectname-main.css'
+			main: {
+				options: {
+					browsers: ['last 3 versions', '> 1%']
+				},
+
+				files: {
+					'css/projectname-main.css' : 'less/projectname-main.css'
+				}
+			},
+
+			print: {
+				options: {
+					browsers: ['last 3 versions', '> 1%']
+				},
+
+				files: {
+					'css/projectname-print.css' : 'less/projectname-print.css'
+				}
 			}
 		},
-
-		print: {
-			options: {
-				browsers: ['last 3 versions', '> 1%']
-			},
-
-			files: {
-				'css/projectname-print.css' : 'less/projectname-print.css'
-			}
-		}
-	},
 
 	// CSS Minifier Block
 	cssmin: {
@@ -156,7 +156,7 @@ module.exports = function(grunt) {
 	// Javascript Concatenation Block
 	concat: {
 		options: {
-			separator: ';', // separate all our scripts with semicolons
+			separator: ';' // separate all our scripts with semicolons
 		},
 
 		dist: {
@@ -167,18 +167,47 @@ module.exports = function(grunt) {
 
 	// Javascript Uglification Block
 	uglify: {
-		my_target: {
+		options: {
+			screwIE8: true
+		},
+
+		beauty: {
+			options: {
+				beautify: {
+					width: 75,
+					beautify: true
+				},
+
+				mangle: false
+			},
+
+			files: {
+				'concatenated/beauty/projectname.beauty.js': 'concatenated/projectname.js'
+			}
+		},
+
+		ugly: {
 			files: {
 				'js/projectname.min.js': 'concatenated/projectname.js'
 			}
 		}
 	},
 
+	// Javascript Hinting Block
+	jshint: {
+		options: {
+			jshintrc: '.jslintrc'
+		},
+
+		afterconcat: ['concatenated/projectname.js'],
+		afteruglify: ['js/projectname.min.js']
+	},
+
 	// Image Compression Block
 	imagemin: {
 		png: {
 			options: {
-				optimizationLevel: 7 // compression level
+				optimizationLevel: 2 // compression level
 			},
 
 			files: [{
@@ -219,7 +248,7 @@ module.exports = function(grunt) {
 		mumin: {
 			files: ['unminified-html/*.html'], // watch all html-files for changes
 			tasks: ['mumin'] // when changes -> do minify
-		}
+		},
 
 		atf: {
 			files: ['less/atf/*.less'], // watch all .less files for the above-the-fold CSS for changes
@@ -229,16 +258,21 @@ module.exports = function(grunt) {
 		main: {
 			files: ['less/main/*.less'], // watch all .less files for the main CSS for changes
 			tasks: ['lessy-main'] // when changes -> do all defined tasks (see grunt.registerTask 'lessy-main')
-		}
+		},
 
 		print: {
 			files: ['less/print/*.less'], // watch all .less files for the print CSS for changes
 			tasks: ['lessy-print'] // when changes -> do all defined tasks (see grunt.registerTask 'lessy-print')
-		}
+		},
 
-		js: {
+		js-beauty: {
 			files: ['uncompressed-js/*.js'], // watch all separated and unminified js files for changes
-			tasks: ['jayessy'] // when changes -> do all defined tasks
+			tasks: ['jayessy-beauty'] // when changes -> do all defined tasks
+		},
+
+		js-ugly: {
+			files: ['uncompressed-js/*.js'], // watch all separated and unminified js files for changes
+			tasks: ['jayessy-ugly'] // when changes -> do all defined tasks
 		},
 
 		imagemin: {
@@ -253,6 +287,7 @@ grunt.registerTask('mumin', ['htmlmin']);
 grunt.registerTask('lessy-atf', ['less:atf', 'autoprefixer:atf', 'cssmin:atf', 'csslint:atf']);
 grunt.registerTask('lessy-main', ['less:main', 'autoprefixer:main', 'cssmin:main', 'csslint:main']);
 grunt.registerTask('lessy-main', ['less:print', 'autoprefixer:print', 'cssmin:print', 'csslint:print']);
-grunt.registerTask('jayessy', ['concat', 'uglify']);
+grunt.registerTask('jayessy-beauty', ['concat', 'jshint:afterconcat', 'uglify:beauty', 'jshint:afteruglify']);
+grunt.registerTask('jayessy-ugly', ['concat', 'jshint:afterconcat', 'uglify:ugly', 'jshint:afteruglify']);
 grunt.registerTask('imageminify', ['imagemin']); // giving both the same name causes issues
 }
