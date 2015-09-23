@@ -193,16 +193,6 @@ module.exports = function(grunt) {
 		}
 	},
 
-	// Javascript Hinting Block
-	jshint: {
-		options: {
-			jshintrc: '.jslintrc'
-		},
-
-		afterconcat: ['concatenated/projectname.js'],
-		afteruglify: ['js/projectname.min.js']
-	},
-
 	// Image Compression Block
 	imagemin: {
 		png: {
@@ -265,12 +255,12 @@ module.exports = function(grunt) {
 			tasks: ['lessy-print'] // when changes -> do all defined tasks (see grunt.registerTask 'lessy-print')
 		},
 
-		jayessy-beauty: {
+		beauty: {
 			files: ['uncompressed-js/*.js'], // watch all separated and unminified js files for changes
 			tasks: ['jayessy-beauty'] // when changes -> do all defined tasks
 		},
 
-		jayessy-ugly: {
+		ugly: {
 			files: ['uncompressed-js/*.js'], // watch all separated and unminified js files for changes
 			tasks: ['jayessy-ugly'] // when changes -> do all defined tasks
 		},
