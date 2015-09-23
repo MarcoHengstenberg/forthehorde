@@ -76,7 +76,7 @@ module.exports = function(grunt) {
 				},
 
 				files: {
-					'less/projectname-print.css' : 'less/print/combined-projectname-main.less' // create a Print Stylesheet
+					'less/projectname-print.css' : 'less/print/combined-projectname-print.less' // create a Print Stylesheet
 				}
 			}
 		},
@@ -265,12 +265,12 @@ module.exports = function(grunt) {
 			tasks: ['lessy-print'] // when changes -> do all defined tasks (see grunt.registerTask 'lessy-print')
 		},
 
-		js-beauty: {
+		jayessy-beauty: {
 			files: ['uncompressed-js/*.js'], // watch all separated and unminified js files for changes
 			tasks: ['jayessy-beauty'] // when changes -> do all defined tasks
 		},
 
-		js-ugly: {
+		jayessy-ugly: {
 			files: ['uncompressed-js/*.js'], // watch all separated and unminified js files for changes
 			tasks: ['jayessy-ugly'] // when changes -> do all defined tasks
 		},
@@ -286,7 +286,7 @@ grunt.registerTask('default', []);
 grunt.registerTask('mumin', ['htmlmin']);
 grunt.registerTask('lessy-atf', ['less:atf', 'autoprefixer:atf', 'cssmin:atf', 'csslint:atf']);
 grunt.registerTask('lessy-main', ['less:main', 'autoprefixer:main', 'cssmin:main', 'csslint:main']);
-grunt.registerTask('lessy-main', ['less:print', 'autoprefixer:print', 'cssmin:print', 'csslint:print']);
+grunt.registerTask('lessy-print', ['less:print', 'autoprefixer:print', 'cssmin:print', 'csslint:print']);
 grunt.registerTask('jayessy-beauty', ['concat', 'jshint:afterconcat', 'uglify:beauty', 'jshint:afteruglify']);
 grunt.registerTask('jayessy-ugly', ['concat', 'jshint:afterconcat', 'uglify:ugly', 'jshint:afteruglify']);
 grunt.registerTask('imageminify', ['imagemin']); // giving both the same name causes issues
