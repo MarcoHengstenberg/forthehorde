@@ -277,7 +277,7 @@ grunt.registerTask('mumin', ['htmlmin']);
 grunt.registerTask('lessy-atf', ['less:atf', 'autoprefixer:atf', 'cssmin:atf', 'csslint:atf']);
 grunt.registerTask('lessy-main', ['less:main', 'autoprefixer:main', 'cssmin:main', 'csslint:main']);
 grunt.registerTask('lessy-print', ['less:print', 'autoprefixer:print', 'cssmin:print', 'csslint:print']);
-grunt.registerTask('jayessy-beauty', ['concat', 'jshint:afterconcat', 'uglify:beauty', 'jshint:afteruglify']);
-grunt.registerTask('jayessy-ugly', ['concat', 'jshint:afterconcat', 'uglify:ugly', 'jshint:afteruglify']);
+grunt.registerTask('jayessy-beauty', ['concat', 'uglify:beauty']);
+grunt.registerTask('jayessy-ugly', ['concat', 'uglify:ugly']);
 grunt.registerTask('imageminify', ['imagemin']); // giving both the same name causes issues
 }
