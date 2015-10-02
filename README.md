@@ -5,11 +5,12 @@ First of all: Feel free to open issues, ask questions and tinker with the code t
 
 May this repo be useful for each and everyone around the world. I have commented on as much as possible and as little as I hope was needed to keep the files from being a comment-mess with no real content.
 
-**Update (04.05.2015):** Got rid of unneeded projectfiles, which will be generated as soon as one is working with this Grunt setup. I also added jshint to the workflow and enhanced the uglify task with a beautify task, so I can have both mangled and compressed production-ready files but also beautified JavaScript for debugging purposes. Realized I forgot about some commas and added them as well. Mea Culpa.
+**Update (04.05.2015):** Got rid of unneeded projectfiles, which will be generated as soon as one is working with this Grunt setup. I also <del>added jshint to the workflow and</del> enhanced the uglify task with a beautify task, so I can have both mangled and compressed production-ready files but also beautified JavaScript for debugging purposes. Realized I forgot about some commas and added them as well. Mea Culpa.
 
 After killing different files some folders remained empty thus I added a few `.gitkeep files in there. Kill them or leave them or gitignore them – whatever suits you best.
 
-The `.jshintignore` file ignores all node_modules.
+<del>The `.jshintignore` file ignores all node_modules.</del> <ins>jshinting went out the window.</ins>
+
 Lowered the compression level for pngquant. Will have to think of a better option to work on PNG files or may be completely switch to a different Plug-In (TinyPNG looks promising).
 
 I hope I was able to fix a few bugs without introducing new ones.
@@ -59,6 +60,8 @@ I separated the critical CSS from the main stylesheet and also extracted the pri
 5. Finally the minified `projectname.suffix.min.css` files are created inside the `css` directory
 
 The good thing here comes with the _watch-task_ making every saved change into a working development file and a minified production version of it.
+
+In case you were to prefer [Sass](https://github.com/gruntjs/grunt-contrib-sass) or postCSS or [Stylus](https://github.com/gruntjs/grunt-contrib-stylus), then go ahead and kill anything LESS-related and create your own setup with one of the other preprocessors/postprocessors.
 
 ### .csslintrc
 

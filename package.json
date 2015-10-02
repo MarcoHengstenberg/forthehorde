@@ -15,7 +15,6 @@
 		"grunt-contrib-csslint"	: "*",
 		"grunt-contrib-concat"	: "*",
 		"grunt-contrib-uglify"	: "*",
-		"grunt-contrib-jshint"	: "*",
 		"grunt-contrib-imagemin": "*",
 		"grunt-contrib-watch" 	: "*",
 		"matchdep" 							: "*"
