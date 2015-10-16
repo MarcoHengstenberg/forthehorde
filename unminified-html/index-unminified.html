@@ -11,6 +11,77 @@
 
   <title>Title of the project</title>
 
+  <!--
+    rel="dns-prefetch" makes sure that third-party contents from a
+    specific URL are loaded faster. How? We do the DNS handshake now
+    and not when said file is requested, so we have that part of the
+    whole connection process out of the way already.
+
+    When this is helpful? Are you using a CDN for assets? Do you use
+    webfonts being served from a third-party domain? Here you go!
+    Oh, Analytics are another option.
+
+    This attribute has great support: http://caniuse.com/#feat=link-rel-dns-prefetch
+  -->
+  <link rel="dns-prefetch" href="http://whatever-domain.abc" />
+
+  <!--
+    On top of the above you could do the complete DNS, TCP, TLS
+    handshake in the background with the following rel-attribute.
+
+    Support's not that great though: http://caniuse.com/#feat=link-rel-preconnect
+  -->
+  <link rel="preconnect" href="http://whatever-domain.abc" />
+
+  <!--
+    If there is a single file you wish to prefetch for your visitors,
+    you can do so as well. You could go the route of telling the
+    browser that a certain resource is needed on subsequent visits,
+    so it will be loaded at some point and be placed in the visitor's
+    cache.
+    Could be a file on your server or whereever.
+  -->
+  <link rel="prefetch" href="file.xyz" />
+
+  <!--
+    If there is a single file you wish to be loaded parallely to the
+    initial request to your HTML or whatever comes first, you should
+    go with rel="subresource". That makes sure this file will be
+    loaded as fast as possible as you mark it as high priority that
+    way.
+
+    Again, this file could be on your server as well as it can be
+    some third-party stylesheet, script, webfont or whatever.
+  -->
+  <link rel="subresource" href="file.xyz" />
+
+  <!--
+    All of the above being said: Don't overdo this. The more you
+    add the more you're back to the standard way browsers request
+    your files over the network.
+  -->
+
+  <!--
+    Now for something special: rel="prerender"...
+    1. You shouldn't do this to your users, as this will download
+      a whole page and all files related to it into the users
+      cache.
+    2. You can do this for pages you know your visitors will visit
+      next on your own website. For example in a shop, where you
+      know that people who look at their cart might check out of
+      the shop next. So on the cart.html page you set a <link>
+      element in the head with rel="prerender" and a href of
+      checkout.html for example. The checkout will render
+      instantly - no loading time.
+
+    The worst thing would be to laod a whole different domain
+    with this technique. You would add huge amounts of data to
+    your visitors cache without knowing, if he's ever going to
+    use it because sometimes people don't do what you want them
+    to do on your website. Amazing! Right? ;-)
+  -->
+  <link rel="prerender" href="probably-next-page.extension" />
+
   <!-- Inline Styles from the above-the-fold Stylesheet -->
   <style>/* Above the fold CSS goes here */</style>
 

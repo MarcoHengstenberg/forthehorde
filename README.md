@@ -5,6 +5,8 @@ First of all: Feel free to open issues, ask questions and tinker with the code t
 
 May this repo be useful for each and everyone around the world. I have commented on as much as possible and as little as I hope was needed to keep the files from being a comment-mess with no real content.
 
+**Update (16.10.2015):** I added some placeholder `<link>` elements in the `<head>` section of my uninified HTML file with different _rel-attributes_ on them. I'll explain in the comments next to those `<link>` elements what they do and why it's helpful to have them and how not to overdo it with those. As there's only so much space, here's a link to a [Slidedeck](https://docs.google.com/presentation/d/18zlAdKAxnc51y_kj-6sWLmnjl6TLnaru_WH0LJTjP-o/present#slide=id.p19) by [Ilya Grigorik](https://github.com/igrigorik) explaining the whole concept in more detail.
+
 **Update (04.05.2015):** Got rid of unneeded projectfiles, which will be generated as soon as one is working with this Grunt setup. I also <del>added jshint to the workflow and</del> enhanced the uglify task with a beautify task, so I can have both mangled and compressed production-ready files but also beautified JavaScript for debugging purposes. Realized I forgot about some commas and added them as well. Mea Culpa.
 
 After killing different files some folders remained empty thus I added a few `.gitkeep files in there. Kill them or leave them or gitignore them – whatever suits you best.
@@ -76,6 +78,7 @@ Here comes the Javascript Workflow:
 1. All Javascript files go into the `uncompressed-js` directory, uncompressed, unminified, ideally documented and commented and explained and whatever you should do in terms of _"This file does this and that because"_
 2. They are then taken, concatenated and placed as `projectname.js` inside the `concatenated` directory
 3. Following up comes the uglify task and creates `projectname.min.js` inside the `js` folder
+4. Parallely they are concatenated and beautified and put in the `concatenated/beauty/` folder
 
 Again, I'm only saving changes to the js-files inside `uncompressed-js` and let the *watch-task* do the hard work.
 
