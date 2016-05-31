@@ -5,6 +5,8 @@ First of all: Feel free to open issues, ask questions and tinker with the code t
 
 May this repo be useful for each and everyone around the world. I have commented on as much as possible and as little as I hope was needed to keep the files from being a comment-mess with no real content.
 
+**Update (31.05.2016):** End of May 2016 already and all I got is a tiny update on "Resource Hinting" in the `<head>` section of my HTML file. Yet, what an update it is indeed. `preload` landed browser support and the one for `preconnect` got much better than the last time I checked. Also removed the part with `subresource` as it might come in handy at some point but I haven't found it yet.
+
 **Update (16.10.2015):** I added some placeholder `<link>` elements in the `<head>` section of my uninified HTML file with different _rel-attributes_ on them. I'll explain in the comments next to those `<link>` elements what they do and why it's helpful to have them and how not to overdo it with those. As there's only so much space, here's a link to a [Slidedeck](https://docs.google.com/presentation/d/18zlAdKAxnc51y_kj-6sWLmnjl6TLnaru_WH0LJTjP-o/present#slide=id.p19) by [Ilya Grigorik](https://github.com/igrigorik) explaining the whole concept in more detail.
 
 **Update (04.05.2015):** Got rid of unneeded projectfiles, which will be generated as soon as one is working with this Grunt setup. I also <del>added jshint to the workflow and</del> enhanced the uglify task with a beautify task, so I can have both mangled and compressed production-ready files but also beautified JavaScript for debugging purposes. Realized I forgot about some commas and added them as well. Mea Culpa.
