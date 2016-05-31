@@ -9,9 +9,12 @@
   -->
   <meta charset="UTF-8" />
 
+  <meta content="width=device-width, initial-scale=1" name="viewport" />
+
   <title>Title of the project</title>
 
-  <!--
+  <!-- Resource Hints: https://www.w3.org/TR/resource-hints/#resource-hints
+
     rel="dns-prefetch" makes sure that third-party contents from a
     specific URL are loaded faster. How? We do the DNS handshake now
     and not when said file is requested, so we have that part of the
@@ -29,9 +32,11 @@
     On top of the above you could do the complete DNS, TCP, TLS
     handshake in the background with the following rel-attribute.
 
-    Support's not that great though: http://caniuse.com/#feat=link-rel-preconnect
+    Make sure to add the crossorigin boolean!
+
+    Support's getting better: http://caniuse.com/#feat=link-rel-preconnect
   -->
-  <link rel="preconnect" href="http://whatever-domain.abc" />
+  <link rel="preconnect" href="http://whatever-domain.abc" crossorigin />
 
   <!--
     If there is a single file you wish to prefetch for your visitors,
@@ -44,28 +49,19 @@
   <link rel="prefetch" href="file.xyz" />
 
   <!--
-    If there is a single file you wish to be loaded parallely to the
-    initial request to your HTML or whatever comes first, you should
-    go with rel="subresource". That makes sure this file will be
-    loaded as fast as possible as you mark it as high priority that
-    way.
-
-    Again, this file could be on your server as well as it can be
-    some third-party stylesheet, script, webfont or whatever.
-  -->
-  <link rel="subresource" href="file.xyz" />
-
-  <!--
     All of the above being said: Don't overdo this. The more you
     add the more you're back to the standard way browsers request
     your files over the network.
+    Making all files high priority won't make the UX any better may be
+    you'll make it even worse as browsers are already quite savvy
+    with prioritizing.
   -->
 
   <!--
     Now for something special: rel="prerender"...
     1. You shouldn't do this to your users, as this will download
       a whole page and all files related to it into the users
-      cache.
+      cache (more realistically it's an invisible tab in the back).
     2. You can do this for pages you know your visitors will visit
       next on your own website. For example in a shop, where you
       know that people who look at their cart might check out of
@@ -82,12 +78,25 @@
   -->
   <link rel="prerender" href="probably-next-page.extension" />
 
+  <!--
+    The most recent link-rel-thingy we got and it is already supported in
+    Chrome: preload. preload is like ServerPush because you can send files over
+    to the user while the HTML is downloading.
+
+    Nice technique*: in order to prevent a stylesheet from blocking the
+    rendering path but have it at your user's machine asap, we can do the
+    following.
+
+    *: See the <noscript> section at the end of the <head> section of this page for
+    the fallback to this technique.
+  -->
+  <link rel="preload" href="link/to/your/stylesheet.css" as="style" onload="this.rel='stylesheet'" />
+
   <!-- Inline Styles from the above-the-fold Stylesheet -->
   <style>/* Above the fold CSS goes here */</style>
 
-  <meta content="width=device-width, initial-scale=1" name="viewport" />
+  <!-- Descriptions are for Search Eng... for Google. -->
   <meta content="Description of the project" name="description" />
-
   <!-- And just for good measure and because it's fun to have the discussion over and over again -->
   <meta content="keywords, lol, rofl, omg, keywords" name="keywords" />
 
@@ -123,10 +132,9 @@
   <meta content="images/projectname-200x200.jpg" property="og:image" />
   <link href="images/projectname-200x200.jpg" rel="image_src" />
 
-  <!-- You don't have JS supported - no big deal -->
+  <!-- You don't have JS or preload supported - no big deal -->
   <noscript>
   <link href="css/projectname.main.min.css" media="all" rel="stylesheet" />
-  <link href="css/projectname.print.min.css" media="print" rel="stylesheet" />
   </noscript>
 
   <!--
@@ -134,6 +142,12 @@
     need support for IE8:
   -->
   <!--[if lt IE 9]><link href="ie8-specific-stylesheet.css" type="text/css" media="all" rel="stylesheet" /><script src="//html5shiv.googlecode.com/svn/trunk/html5.js"></script><![endif]-->
+
+  <!--
+    Did you know that media="print" will prevent the stylesheetdownload from
+    blocking rendering? Me neither but it doesn't. Great.
+  -->
+  <link href="css/projectname.print.min.css" media="print" rel="stylesheet" />
 
 </head>
 <body>
