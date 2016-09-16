@@ -5,9 +5,27 @@ First of all: Feel free to open issues, ask questions and tinker with the code t
 
 May this repo be useful for each and everyone around the world. I have commented on as much as possible and as little as I hope was needed to keep the files from being a comment-mess with no real content.
 
+––––
+
+**HUGE Update (16.09.2016):** I added in a bit of my current knowledge about [Service Worker](https://jakearchibald.github.io/isserviceworkerready/). Will add any additional knowledge as soon as it hits my brain and got digested. Please don't take it as it is right now, as it will not work as you might expect it to (it doesn't work as I expect it to and I wrote it, so that tells a lot I guess).
+
+Just so you know what is what:
+
+- peon.js: this is the serviceworker, named after the basic orc-unit in Warcraft (seeing a theme here?)
+- cachefiles.json: list of files to be cached by the serviceworker
+- manifest.json: provides meta-data about the project so it can be turned into a progressive web app
+- uncompressed-js/peon-register.js: registerscript for the serviceworker
+- uncompressed-js/peon-unregister.js: unregisterscript for the serviceworker (naming conventions are great, right?)
+
+Also I added in a polyfill for the `rel="preload"` link tag so older browsers understand what's going on here. On top of that I added loadCSS, onloadCSS and loadJS in order to have all asynchronously loaded assets for my project.
+
+Nextup: cleanup, further setup of the serviceworker et al, updating the gruntfile and package.json
+
+––––
+
 **Update (31.05.2016):** End of May 2016 already and all I got is a tiny update on "Resource Hinting" in the `<head>` section of my HTML file. Yet, what an update it is indeed. `preload` landed browser support and the one for `preconnect` got much better than the last time I checked. Also removed the part with `subresource` as it might come in handy at some point but I haven't found it yet.
 
-**Update (16.10.2015):** I added some placeholder `<link>` elements in the `<head>` section of my uninified HTML file with different _rel-attributes_ on them. I'll explain in the comments next to those `<link>` elements what they do and why it's helpful to have them and how not to overdo it with those. As there's only so much space, here's a link to a [Slidedeck](https://docs.google.com/presentation/d/18zlAdKAxnc51y_kj-6sWLmnjl6TLnaru_WH0LJTjP-o/present#slide=id.p19) by [Ilya Grigorik](https://github.com/igrigorik) explaining the whole concept in more detail.
+**Update (16.10.2015):** I added some placeholder `<link>` elements in the `<head>` section of my unminified HTML file with different _rel-attributes_ on them. I'll explain in the comments next to those `<link>` elements what they do and why it's helpful to have them and how not to overdo it with those. As there's only so much space, here's a link to a [Slidedeck](https://docs.google.com/presentation/d/18zlAdKAxnc51y_kj-6sWLmnjl6TLnaru_WH0LJTjP-o/present#slide=id.p19) by [Ilya Grigorik](https://github.com/igrigorik) explaining the whole concept in more detail.
 
 **Update (04.05.2015):** Got rid of unneeded projectfiles, which will be generated as soon as one is working with this Grunt setup. I also <del>added jshint to the workflow and</del> enhanced the uglify task with a beautify task, so I can have both mangled and compressed production-ready files but also beautified JavaScript for debugging purposes. Realized I forgot about some commas and added them as well. Mea Culpa.
 
@@ -24,6 +42,8 @@ I hope I was able to fix a few bugs without introducing new ones.
 **Update (24.09.2014):** While I was already on it I added two new tasks to the Grunt workflow and a new dotfile entered the arena as well. Check it out. May it be useful to you.
 
 **Update (23.09.2014):** As I have not come around updating the repo until yesterday since my last deploy in... errr... well... long ago... I have to update the readme, now, as well.
+
+––––
 
 ### What's in this for me
 
