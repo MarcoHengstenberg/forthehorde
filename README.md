@@ -20,7 +20,7 @@ The name "For the horde" stems from the basic orcish fighting unit in Warcraft 3
 
 I also added the loadCSS script and the [preload](https://www.smashingmagazine.com/2016/02/preload-what-is-it-good-for/) polyfill to the unminified `index.html` file. As I'll be using preload anyways, I will add in the polyfill and loadCSS no matter what.
 
-While being on the matter of updating I kicked good ol' autoprefixer and replaced it with postCSS and its plugins "autoprefixer" and "cssnano". Setup is done with.
+While being on the matter of updating I kicked good ol' autoprefixer and replaced it with postCSS and its plugins "autoprefixer" and "cssnano". Setup is done with. By doing so I got rid of the CSSlinting task for now. I didn't see the point apart from telling others how I write my CSS in a pretty obtrusive way: as soon as you diverged from my favorite CSS syntax, you'd get an error in Terminal… didn't feel quite right. I'll have to think of something else.
 
 As I added in a few scripts now, which I only need minified and not concatenated, I added an `ugly2production` task to the grunt workflow. That way all JS files in `uncompressed-js` have their whitespace trimmed (nothing else) and then be put directly into the `js` folder.
 
