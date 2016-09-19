@@ -1,11 +1,19 @@
 # FOR THE HOOOORDE
 ## This is my basic grunt setup for front end development
 
-First of all: Feel free to open issues, ask questions and tinker with the code to your likes. There is no license whatsoever I added to the game apart from the "Do whatever the f*** you want" license.
+First of all: Feel free to open issues, ask questions and tinker with the code to your likes.
 
 May this repo be useful for each and everyone around the world. I have commented on as much as possible and as little as I hope was needed to keep the files from being a comment-mess with no real content.
 
 The name "For the horde" stems from the basic orcish fighting unit in Warcraft 3, screaming upon the attack command being given:"[FOR THE HORDE!](https://youtu.be/yswGnzDazdY?t=14s)". As it is, this unit is named "[Grunt](http://classic.battle.net/war3/orc/units/grunt.shtml)".
+
+## How to use
+
+Clone this repository to your computer (or fork first, then clone) and run `npm install` after cd'ing into the directory created. It will create the node_modules directory and install all needed tasks for the grunt workflow to commence.
+
+When looking through the gruntfile and any other assets around the project repo, you'll run into the word `projectname` pretty often. This is thought to be a placeholder for whatever the project you're working on may be, so feel free to replace it with any word you come up with – or what the project at hand suggests.
+
+As there's **no license**, there's also **no warranty**, **no support** (apart from me answering questions whenever I can), **no money** involved and whatever you do, **handle with care**. I'm not perfect and while all of this works for me, it might not for you without changing things
 
 ## Changelog
 
