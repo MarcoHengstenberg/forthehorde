@@ -97,11 +97,14 @@ function isImageRequest (request) {
   * cleanliness and easier maintenance later on, I'm using the
   * JSON file to list all the things I want to be in the cache
   * instantly.
+  *
+  * Note: no slash between ${scope} & ${path}. Otherwise we end
+  * up with a second slash, which will result in requests being made.
   **/
 function readCacheFileList () {
   return fetch('cachefiles.json').then(response => {
     return response.json().then(paths => {
-      return paths.map(path => `${scope}/${path}`);
+      return paths.map(path => `${scope}${path}`);
     });
   });
 }
