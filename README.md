@@ -1,21 +1,25 @@
-# For the hooooorde
+# FOR THE HOOOORDE
 ## This is my basic grunt setup for front end development
 
 First of all: Feel free to open issues, ask questions and tinker with the code to your likes. There is no license whatsoever I added to the game apart from the "Do whatever the f*** you want" license.
 
 May this repo be useful for each and everyone around the world. I have commented on as much as possible and as little as I hope was needed to keep the files from being a comment-mess with no real content.
 
+The name "For the horde" stems from the basic orcish fighting unit in Warcraft 3, screaming upon the attack command being given:"[FOR THE HORDE!](https://youtu.be/yswGnzDazdY?t=14s)". As it is, this unit is named "[Grunt](http://classic.battle.net/war3/orc/units/grunt.shtml)".
+
 ––––
 
-**HUGE Update (16.09.2016):** I added in a bit of my current knowledge about [Service Worker](https://jakearchibald.github.io/isserviceworkerready/). Will add any additional knowledge as soon as it hits my brain and got digested. Please don't take it as it is right now, as it will not work as you might expect it to (it doesn't work as I expect it to and I wrote it, so that tells a lot I guess).
+**HUGE Update (16.09.2016):** I added in a bit of my current knowledge about [Service Worker](https://jakearchibald.github.io/isserviceworkerready/). Will add any additional knowledge as soon as it hits my brain and got digested. Please don't take it as it is right now, as it will not work as you might expect it to.
 
 Just so you know what is what:
 
-- peon.js: this is the serviceworker, named after the basic orc-unit in Warcraft (seeing a theme here?)
+- peon.js: this is the serviceworker, named after [the orcish worker-unit](http://classic.battle.net/war3/orc/units/peon.shtml) in Warcraft
 - cachefiles.json: list of files to be cached by the serviceworker
 - manifest.json: provides meta-data about the project so it can be turned into a progressive web app
 - uncompressed-js/peon-register.js: registerscript for the serviceworker
 - uncompressed-js/peon-unregister.js: unregisterscript for the serviceworker (naming conventions are great, right?)
+
+So, how does the Serviceworker do its magic? Content updates will be recognized as the worker looks over the network for content updates first and then goes to the cache storage. Images and other assets will require the worker to be updated or the version of the asset to be bumped. If all goes wrong we'll deliver the offline page and contents we defined (if we did so).
 
 Also I added in a polyfill for the `rel="preload"` link tag so older browsers understand what's going on here. On top of that I added loadCSS, onloadCSS and loadJS in order to have all asynchronously loaded assets for my project.
 

@@ -166,7 +166,7 @@ self.addEventListener('fetch', event => {
         // nothing changed or network gone, return from cache
         .catch(() => fetchFromCache(request))
         // nothing inside the cache, return offline page
-        .catch(() => caches.match(`${scope}/offline`))
+        .catch(() => caches.match(`${scope}offline.html`))
     );
   // you request images, you get a response
   } else if (isImageRequest(request)) {
