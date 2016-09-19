@@ -19,9 +19,12 @@ module.exports = function(grunt) {
 					'id-unique': true, // Check for unique IDs, not unique -> kickbandie
 					'head-script-disabled': true, // Scripts go to the footer
 
-					/* We are not looking for style in our head as we
-					need that for the critical CSS part. */
-
+					/*
+						We are not looking for style in our head as we
+						need that for the critical CSS part. Also it might make sense
+						to have scripts in your head… whyever… then remove the last line
+						from the htmlhint-block.
+					*/
 				},
 
 				src: ['unminified-html/*.html'] // check all HTML files in this directory
@@ -30,7 +33,7 @@ module.exports = function(grunt) {
 
 		// HTML Minification Block
 		htmlmin: {
-			// mumin stands for "Markup Minification"
+			// mumin stands for "MarkUp MINification"
 			mumin: {
 				options: {
 					collapseWhitespace: true, // yes, we want exactly that
@@ -81,203 +84,180 @@ module.exports = function(grunt) {
 			}
 		},
 
-		// Autoprefixer Block
-		autoprefixer: {
-			atf: {
+		// PostCSS Block
+		postcss: {
+			options: {
+				map: {
+					inline: false, // saving sourcemaps as separate files
+					annotation: 'css/maps/' // putting sourcemaps here
+				},
+
+				processors: [
+					require('autoprefixer')({browsers: 'last 2 versions'}), // autoprefixer plugin with setting
+					require('cssnano')() // cssnano = minifier for CSS
+				]
+			},
+
+			dist: {
+				src: 'less/*.css',
+				dest: 'css/*.min.css'
+			}
+		},
+
+		// Javascript Concatenation Block
+		concat: {
+			options: {
+				separator: ';' // separate all our scripts with semicolons
+			},
+
+			dist: {
+				src: ['uncompressed-js/*.js'], // take all scripts from this folder
+				dest: 'concatenated/projectname.concat.js' // concatenate them into one and put it here
+			}
+		},
+
+		// Javascript Uglification Block
+		uglify: {
+			// yeah, we don't support IE8 here in JS lands
+			options: {
+				screwIE8: true
+			},
+
+			// first of all I want to have a readable concatenated file
+			beauty: {
 				options: {
-					browsers: ['last 3 versions', '> 1%']
+					// so we beautify
+					beautify: {
+						width: 75,
+						beautify: true
+					},
+
+					// and we don't mangle
+					mangle: false
 				},
 
 				files: {
-					'css/projectname-atf.css' : 'less/projectname-atf.css'
+					'concatenated/beauty/projectname.beauty.js': 'concatenated/projectname.concat.js'
 				}
+			},
+
+			// uglyfying the concatenated JS file
+			ugly: {
+				// standard, no options, just compression and mangling the whole thing
+				files: {
+					'js/projectname.concat.min.js': 'concatenated/projectname.concat.js'
+				}
+			},
+
+			// special task in order to minify each script on its own without concatenation
+			// TO DO: currently throws an error after it has run, that the task cannot be found
+			ugly2production: {
+				// in this case it's only whitespace-trimming here
+				options: {
+					mangle: false,
+					compress: false
+				},
+
+				files: [{
+					expand: true,
+					cwd: 'uncompressed-js',
+					src: '*.js',
+					dest: 'js/'
+				}]
+			}
+		},
+
+		// Image Compression Block
+		imagemin: {
+			png: {
+				options: {
+					optimizationLevel: 2 // compression level
+				},
+
+				files: [{
+					expand: true, // Dynamic expansion of capabilities
+					cwd: 'raw', // cwd = current working directory = where do we have the uncompressed images
+					src: ['**/*.png'], // check for all png files in cwd
+					dest: 'images', // put images into this directory after compression
+					ext: '.png' // give them the extension .png
+				}]
+			},
+
+			jpg: {
+				options: {
+					progressive: true // progressive conversion, compress that JPG
+				},
+
+				files: [{
+					expand: true, // see for png
+					cwd: 'raw',
+					src: ['**/*.jpg'],
+					dest: 'images',
+					ext: '.jpg'
+				}]
+			}
+		},
+
+		// Watch Block
+		watch: {
+			options: {
+				livereload: true,
+			},
+
+			html: {
+				files: ['unminified-html/*.html'], // watch all html-files for changes
+				tasks: ['htmlhint'] // when changes -> do lint
+			},
+
+			mumin: {
+				files: ['unminified-html/*.html'], // watch all html-files for changes
+				tasks: ['mumin'] // when changes -> do minify
+			},
+
+			atf: {
+				files: ['less/atf/*.less'], // watch all .less files for the above-the-fold CSS for changes
+				tasks: ['lessy-atf'] // when changes -> do all defined tasks (see grunt.registerTask 'lessy-atf')
 			},
 
 			main: {
-				options: {
-					browsers: ['last 3 versions', '> 1%']
-				},
-
-				files: {
-					'css/projectname-main.css' : 'less/projectname-main.css'
-				}
+				files: ['less/main/*.less'], // watch all .less files for the main CSS for changes
+				tasks: ['lessy-main'] // when changes -> do all defined tasks (see grunt.registerTask 'lessy-main')
 			},
 
 			print: {
-				options: {
-					browsers: ['last 3 versions', '> 1%']
-				},
-
-				files: {
-					'css/projectname-print.css' : 'less/projectname-print.css'
-				}
-			}
-		},
-
-	// CSS Minifier Block
-	cssmin: {
-		atf: {
-			src: 'css/projectname-atf.css',
-			dest: 'css/projectname.atf.min.css'
-		},
-
-		main: {
-			src: 'css/projectname-main.css',
-			dest: 'css/projectname.main.min.css'
-		},
-
-		print: {
-			src: 'css/projectname-print.css',
-			dest: 'css/projectname.print.min.css'
-		}
-	},
-
-	// CSS Linting Block
-	csslint: {
-
-		// Options on what throws a warning can be found in the dotfile
-		options: {
-			csslintrc: '.csslintrc'
-		},
-
-		atf: {
-			src: 'css/projectname.atf.min.css'
-		},
-
-		main: {
-			src: 'css/projectname.main.min.css'
-		},
-
-		print: {
-			src: 'css/projectname.print.min.css'
-		}
-	},
-
-	// Javascript Concatenation Block
-	concat: {
-		options: {
-			separator: ';' // separate all our scripts with semicolons
-		},
-
-		dist: {
-			src: ['uncompressed-js/*.js'], // take all scripts from this folder
-			dest: 'concatenated/projectname.js' // concatenate them into one and put it here
-		}
-	},
-
-	// Javascript Uglification Block
-	uglify: {
-		options: {
-			screwIE8: true
-		},
-
-		beauty: {
-			options: {
-				beautify: {
-					width: 75,
-					beautify: true
-				},
-
-				mangle: false
+				files: ['less/print/*.less'], // watch all .less files for the print CSS for changes
+				tasks: ['lessy-print'] // when changes -> do all defined tasks (see grunt.registerTask 'lessy-print')
 			},
 
-			files: {
-				'concatenated/beauty/projectname.beauty.js': 'concatenated/projectname.js'
-			}
-		},
-
-		ugly: {
-			files: {
-				'js/projectname.min.js': 'concatenated/projectname.js'
-			}
-		}
-	},
-
-	// Image Compression Block
-	imagemin: {
-		png: {
-			options: {
-				optimizationLevel: 2 // compression level
+			beauty: {
+				files: ['uncompressed-js/*.js'], // watch all separated and unminified js files for changes
+				tasks: ['jayessy-beauty'] // when changes -> do all defined tasks
 			},
 
-			files: [{
-				expand: true, // Dynamic expansion of capabilities
-				cwd: 'raw', // cwd = current working directory = where do we have the uncompressed images
-				src: ['**/*.png'], // check for all png files in cwd
-				dest: 'images', // put images into this directory after compression
-				ext: '.png' // give them the extension .png
-			}]
-		},
-
-		jpg: {
-			options: {
-				progressive: true // progressive conversion, compress that JPG
+			ugly: {
+				files: ['uncompressed-js/*.js'], // watch all separated and unminified js files for changes
+				tasks: ['jayessy-ugly'] // when changes -> do all defined tasks
 			},
 
-			files: [{
-				expand: true, // see for png
-				cwd: 'raw',
-				src: ['**/*.jpg'],
-				dest: 'images',
-				ext: '.jpg'
-			}]
+			ugly2production: {
+				files: ['uncompressed-js/*.js'],
+				tasks: ['ugly2production']
+			},
+
+			imagemin: {
+				files: ['raw/*.jpg', 'raw/*.png'], // watch for images with those extensions being put into the raw folder
+				tasks: ['imageminify'] // new images -> do task
+			}
 		}
-	},
+	});
 
-	// Watch Block
-	watch: {
-		options: {
-			livereload: true,
-		},
-
-		html: {
-			files: ['unminified-html/*.html'], // watch all html-files for changes
-			tasks: ['htmlhint'] // when changes -> do lint
-		},
-
-		mumin: {
-			files: ['unminified-html/*.html'], // watch all html-files for changes
-			tasks: ['mumin'] // when changes -> do minify
-		},
-
-		atf: {
-			files: ['less/atf/*.less'], // watch all .less files for the above-the-fold CSS for changes
-			tasks: ['lessy-atf'] // when changes -> do all defined tasks (see grunt.registerTask 'lessy-atf')
-		},
-
-		main: {
-			files: ['less/main/*.less'], // watch all .less files for the main CSS for changes
-			tasks: ['lessy-main'] // when changes -> do all defined tasks (see grunt.registerTask 'lessy-main')
-		},
-
-		print: {
-			files: ['less/print/*.less'], // watch all .less files for the print CSS for changes
-			tasks: ['lessy-print'] // when changes -> do all defined tasks (see grunt.registerTask 'lessy-print')
-		},
-
-		beauty: {
-			files: ['uncompressed-js/*.js'], // watch all separated and unminified js files for changes
-			tasks: ['jayessy-beauty'] // when changes -> do all defined tasks
-		},
-
-		ugly: {
-			files: ['uncompressed-js/*.js'], // watch all separated and unminified js files for changes
-			tasks: ['jayessy-ugly'] // when changes -> do all defined tasks
-		},
-
-		imagemin: {
-			files: ['raw/*.jpg', 'raw/*.png'], // watch for images with those extensions being put into the raw folder
-			tasks: ['imageminify'] // new images -> do task
-		}
-	}
-});
-
-grunt.registerTask('default', []);
-grunt.registerTask('mumin', ['htmlmin']);
-grunt.registerTask('lessy-atf', ['less:atf', 'autoprefixer:atf', 'cssmin:atf', 'csslint:atf']);
-grunt.registerTask('lessy-main', ['less:main', 'autoprefixer:main', 'cssmin:main', 'csslint:main']);
-grunt.registerTask('lessy-print', ['less:print', 'autoprefixer:print', 'cssmin:print', 'csslint:print']);
-grunt.registerTask('jayessy-beauty', ['concat', 'uglify:beauty']);
-grunt.registerTask('jayessy-ugly', ['concat', 'uglify:ugly']);
-grunt.registerTask('imageminify', ['imagemin']); // giving both the same name causes issues
+	grunt.registerTask('default', []);
+	grunt.registerTask('mumin', ['htmlmin']);
+	grunt.registerTask('lessy-atf', ['less:atf', 'postcss']);
+	grunt.registerTask('lessy-main', ['less:main', 'postcss']);
+	grunt.registerTask('lessy-print', ['less:print', 'postcss']);
+	grunt.registerTask('jayessy-beauty', ['concat', 'uglify:beauty']);
+	grunt.registerTask('jayessy-ugly', ['concat', 'uglify:ugly']);
+	grunt.registerTask('ugly2production', ['uglify:ugly2production']);
+	grunt.registerTask('imageminify', ['imagemin']); // giving both the same name causes issues
 }

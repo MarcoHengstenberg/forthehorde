@@ -78,22 +78,26 @@
   -->
   <link rel="prerender" href="probably-next-page.extension" />
 
+  <!-- Inline Styles from the above-the-fold Stylesheet -->
+  <style>/* Above the fold CSS goes here */</style>
+
   <!--
     The most recent link-rel-thingy we got and it is already supported in
-    Chrome: preload. preload is like ServerPush because you can send files over
-    to the user while the HTML is downloading.
+    Chrome & Firefox & we got a polyfill for it: preload. preload is like
+    ServerPush because you can send files over to the user while the HTML
+    is downloading.
 
     Nice technique*: in order to prevent a stylesheet from blocking the
     rendering path but have it at your user's machine asap, we can do the
     following.
 
-    *: See the <noscript> section at the end of the <head> section of this page for
-    the fallback to this technique.
+    *: See the <noscript> section at the end of the <head> section of this
+    page for the fallback to this technique.
   -->
   <link rel="preload" href="link/to/your/stylesheet.css" as="style" onload="this.rel='stylesheet'" />
 
-  <!-- Inline Styles from the above-the-fold Stylesheet -->
-  <style>/* Above the fold CSS goes here */</style>
+  <!-- You don't have JS or preload supported - no big deal -->
+  <noscript><link href="css/projectname.main.min.css" media="all" rel="stylesheet" /></noscript>
 
   <!-- Descriptions are for Search Eng... for Google. -->
   <meta content="Description of the project" name="description" />
@@ -132,11 +136,6 @@
   <meta content="images/projectname-200x200.jpg" property="og:image" />
   <link href="images/projectname-200x200.jpg" rel="image_src" />
 
-  <!-- You don't have JS or preload supported - no big deal -->
-  <noscript>
-  <link href="css/projectname.main.min.css" media="all" rel="stylesheet" />
-  </noscript>
-
   <!--
     Entirely optional but better than loading respond.js if you
     need support for IE8:
@@ -158,5 +157,16 @@
   <!-- Production
   <script src="js/projectname.min.js"></script>
   -->
+
+  <!--
+    loadCSS for true asynchronous stylesheet loading. Just pass it your CSS files.
+  -->
+  <script>(function(w){"use strict";var loadCSS=function(href,before,media){var doc=w.document;var ss=doc.createElement("link");var ref;if(before){ref=before}else{var refs=(doc.body||doc.getElementsByTagName("head")[0]).childNodes;ref=refs[refs.length-1]}var sheets=doc.styleSheets;ss.rel="stylesheet";ss.href=href;ss.media="only x";function ready(cb){if(doc.body){return cb()}setTimeout(function(){ready(cb)})}ready(function(){ref.parentNode.insertBefore(ss,before?ref:ref.nextSibling)});var onloadcssdefined=function(cb){var resolvedHref=ss.href;var i=sheets.length;while(i--){if(sheets[i].href===resolvedHref){return cb()}}setTimeout(function(){onloadcssdefined(cb)})};function loadCB(){if(ss.addEventListener){ss.removeEventListener("load",loadCB)}ss.media=media||"all"}if(ss.addEventListener){ss.addEventListener("load",loadCB)}ss.onloadcssdefined=onloadcssdefined;onloadcssdefined(loadCB);return ss};if(typeof exports!=="undefined"){exports.loadCSS=loadCSS}else{w.loadCSS=loadCSS}})(typeof global!=="undefined"?global:this);loadCSS('css/projectname.min.css');</script>
+
+  <!--
+    When using <link rel="preload" /> you'll want to polyfill non-supporting browsers.
+    This polyfill relies on loadCSS.
+  -->
+  <script>(function(w){if(!w.loadCSS){return}var rp=loadCSS.relpreload={};rp.support=function(){try{return w.document.createElement("link").relList.supports("preload")}catch(e){return false}};rp.poly=function(){var links=w.document.getElementsByTagName("link");for(var i=0;i<links.length;i++){var link=links[i];if(link.rel==="preload"&&link.getAttribute("as")==="style"){w.loadCSS(link.href,link);link.rel=null}}};if(!rp.support()){rp.poly();var run=w.setInterval(rp.poly,300);if(w.addEventListener){w.addEventListener("load",function(){w.clearInterval(run)})}if(w.attachEvent){w.attachEvent("onload",function(){w.clearInterval(run)})}}})(this);</script>
 </body>
 </html>

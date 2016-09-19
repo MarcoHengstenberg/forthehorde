@@ -1,22 +1,24 @@
 {
-	"name" : "Projectname",
-	"version" : "0.1.0",
-	"description": "Description of the project",
-	"author" : "Your Name",
-	"private" : "true",
-
-	"devDependencies" : {
-		"grunt" : "~0.4.0",
-		"grunt-htmlhint" 				: "*",
-		"grunt-contrib-htmlmin" : "*",
-		"grunt-contrib-less" 		: "*",
-		"grunt-autoprefixer" 		: "*",
-		"grunt-contrib-cssmin"	: "*",
-		"grunt-contrib-csslint"	: "*",
-		"grunt-contrib-concat"	: "*",
-		"grunt-contrib-uglify"	: "*",
-		"grunt-contrib-imagemin": "*",
-		"grunt-contrib-watch" 	: "*",
-		"matchdep" 							: "*"
-	}
+  "name": "Projectname",
+  "version": "0.0.1",
+  "description": "Description of the project",
+  "author": "Your Name",
+  "homepage": "http(s)://url.xyz",
+  "repository": "https://github.com/MarcoHengstenberg/forthehorde",
+  "license": "gotnolicense",
+  "private": "true",
+  "devDependencies": {
+  	"grunt"									: "~0.4.0",
+    "grunt-contrib-htmlmin"	: "*",
+    "grunt-htmlhint"				: "*",
+    "grunt-contrib-less"		: "*",
+    "grunt-postcss"					: "*",
+    "autoprefixer"					: "*",
+    "cssnano"								: "*",
+    "grunt-contrib-concat"	: "*",
+    "grunt-contrib-uglify"	: "*",
+    "grunt-contrib-imagemin": "*",
+    "grunt-contrib-watch"		: "*",
+    "matchdep": "*"
+  }
 }

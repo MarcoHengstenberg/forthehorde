@@ -7,6 +7,23 @@ May this repo be useful for each and everyone around the world. I have commented
 
 The name "For the horde" stems from the basic orcish fighting unit in Warcraft 3, screaming upon the attack command being given:"[FOR THE HORDE!](https://youtu.be/yswGnzDazdY?t=14s)". As it is, this unit is named "[Grunt](http://classic.battle.net/war3/orc/units/grunt.shtml)".
 
+## Changelog
+
+**Update (19.09.2016):** After adjusting here and there, the ServiceWorker is now working. Heureka. Just make sure to use it with care and learn _how_ to use it before deploying it. There are a ton of resources on the matter; have some I can recommend:
+
+- [Lyza Danger Gardner's pragmatist Service Worker](https://github.com/lyzadanger/pragmatist-service-worker)
+- [Lyza's Case-Study on Service Worker](https://www.smashingmagazine.com/2016/02/making-a-service-worker/)
+- [Serviceworke.rs by Mozilla and contributors](https://serviceworke.rs/)
+- [Jake Archibald's blog is a goldmine](https://jakearchibald.com/)
+- [Free Udacity Course by and with Jake Archibald](https://www.udacity.com/course/offline-web-applications--ud899)
+- [HTML5 Rocks Introduction to ServiceWorkers (Outdated but good for a starting point)](http://www.html5rocks.com/en/tutorials/service-worker/introduction/)
+
+I also added the loadCSS script and the [preload](https://www.smashingmagazine.com/2016/02/preload-what-is-it-good-for/) polyfill to the unminified `index.html` file. As I'll be using preload anyways, I will add in the polyfill and loadCSS no matter what.
+
+While being on the matter of updating I kicked good ol' autoprefixer and replaced it with postCSS and its plugins "autoprefixer" and "cssnano". Setup is done with.
+
+As I added in a few scripts now, which I only need minified and not concatenated, I added an `ugly2production` task to the grunt workflow. That way all JS files in `uncompressed-js` have their whitespace trimmed (nothing else) and then be put directly into the `js` folder.
+
 ––––
 
 **HUGE Update (16.09.2016):** I added in a bit of my current knowledge about [Service Worker](https://jakearchibald.github.io/isserviceworkerready/). Will add any additional knowledge as soon as it hits my brain and got digested. Please don't take it as it is right now, as it will not work as you might expect it to.
@@ -55,7 +72,6 @@ I hope I was able to fix a few bugs without introducing new ones.
 
 - [Grunt](#grunt)
 - [LESStoCSS Workflow](#lesstocss)
-- [.csslintrc](#csslintrc)
 - [Javascript Workflow](#javascript-workflow)
 - [Image Compression](#image-compression)
 - [The Index.html](#the-indexhtml)
@@ -67,9 +83,7 @@ I'm using *[Grunt](http://gruntjs.com)* with the following tasks:
 - [htmlhint](https://github.com/yaniswang/grunt-htmlhint)
 - [htmlmin](https://github.com/gruntjs/grunt-contrib-htmlmin)
 - [less](https://github.com/gruntjs/grunt-contrib-less)
-- [autoprefixer](https://github.com/nDmitry/grunt-autoprefixer)
-- [cssmin](https://github.com/gruntjs/grunt-contrib-cssmin)
-- [csslint](https://github.com/gruntjs/grunt-contrib-csslint)
+- [postcss](https://github.com/nDmitry/grunt-postcss)
 - [concat](https://github.com/gruntjs/grunt-contrib-concat)
 - [uglify](https://github.com/gruntjs/grunt-contrib-uglify)
 - [imagemin](https://github.com/gruntjs/grunt-contrib-imagemin)
@@ -84,18 +98,12 @@ I separated the critical CSS from the main stylesheet and also extracted the pri
 1. Inside the `less` directory are three directories, where each is related to a different stylesheet. `atf` is short for _"above-the-fold"_ and contains all less files connected with the critical CSS part of my website, which is the inlined in the head section of the html file. `main` contains all less files for our main stylesheet, which will be loaded after the content has rendered. `print`, as the name suggests it, contains all files for the print stylesheet (also being loaded after the page is done loading). The fourth folder contains files being distributed to all three stylesheets. There we have our variables and mixins set up in order to use them in the other stylesheet. Currently there are only three files but may be you have even better ideas what to do inside that folder. `variables.less` is by its name pretty straight-forward: put color-, length- and other variables in there you want to use later on or do math with or whatever suits you best (and if you don't want to use it, cool, kick it). `general-mixins.less` could contain prefixed stuff but as we're taking care of that with autoprefixer (and grunt) you might have to think of other use-cases; I'm sure you'll find some or can think of at least something. `font-mixins.less` exists as I like to separate font-stuff from my other assets slightly but that's also something very personal, it's up to you if you want to go down that road with me.
 2. All LESS-files have `-projectname.less` as an ending, with a suffix to separate them related to their purpose. `-projectname-atf.less` for _above-the-fold_ styles, `-projectname-main.less` for the main stylesheet and `-projectname-print.less` for, quelle surprise, the print styles.
 3. I create unminified and unprefixed `projectname-suffix.css` files inside the LESS-folder for each of the three stylesheets
-4. Then I run *autoprefixer* (which saves me from writing mixins for vendor-prefix madness and a few kilobytes here and there as I only support browsers 3 versions back and those with at least 1% market-share) and add all prefixes to `projectname-suffix.css` and push them into the CSS folder
-5. Finally the minified `projectname.suffix.min.css` files are created inside the `css` directory
+4. Then I run *postCSS* with its autoprefixer plugin (which saves me from writing mixins for vendor-prefix madness and a few kilobytes here and there as I only support browsers 3 versions back and those with at least 1% market-share) and add all prefixes to `projectname-suffix.css` and push them into the CSS folder
+5. Finally the minified `projectname.suffix.min.css` files are created by cssnano (another plugin of postCSS) inside the `css` directory
 
 The good thing here comes with the _watch-task_ making every saved change into a working development file and a minified production version of it.
 
-In case you were to prefer [Sass](https://github.com/gruntjs/grunt-contrib-sass) or postCSS or [Stylus](https://github.com/gruntjs/grunt-contrib-stylus), then go ahead and kill anything LESS-related and create your own setup with one of the other preprocessors/postprocessors.
-
-### .csslintrc
-
-As every other person I have my way of doing things and therefor this file represents my best measure on how the CSSlint task should do its job. This is something very personal, so alter the settings to your liking.
-
-I added every possible option in there – the ones I want to have a warning about are set to `true` and the rest to `false` because I deem a warning unneccessary or simply not useful. Sometimes I felt very undecided but that's something for a different readme file in a different [repository](https://github.com/MarcoKunz/dotfiles#csslintrc).
+In case you were to prefer [Sass](https://github.com/gruntjs/grunt-contrib-sass) or [Stylus](https://github.com/gruntjs/grunt-contrib-stylus), then go ahead and kill anything LESS-related and create your own setup with one of the other preprocessors/postprocessors.
 
 ### Javascript Workflow
 
@@ -105,6 +113,7 @@ Here comes the Javascript Workflow:
 2. They are then taken, concatenated and placed as `projectname.js` inside the `concatenated` directory
 3. Following up comes the uglify task and creates `projectname.min.js` inside the `js` folder
 4. Parallely they are concatenated and beautified and put in the `concatenated/beauty/` folder
+5. Also there's a second uglify task (`uglify2production`) now, taking the separate files and trimming their whitespace before putting them into the production (`js`) folder without any concatenation going on.
 
 Again, I'm only saving changes to the js-files inside `uncompressed-js` and let the *watch-task* do the hard work.
 
@@ -122,6 +131,8 @@ This is handled by the *watch-task* as well, yet with one caveat: You will need 
 
 What should be noted is the part in the head section concerning the infamous favicon. Jonathan T. Neal pointed out in a [blogpost](http://www.jonathantneal.com/blog/understand-the-favicon/) how [incredibly awesome](https://twitter.com/nice2meatu/status/514045061425020928) (not) the favicon actually is. So, after reading his article about this matter I included his suggested way of cross-browser support for a favicon while maintaining a larger PNG version for retina-displays.
 
-Another important note: I added a `<noscript>` to the head section as a fallback for our stylesheets (main and print stylesheet) being laoded with JavaScript AFTER the content has rendered. So, if there will be no JavaScript, no developer will have to die that day.
+Another important note: I added a `<noscript>` to the head section as a fallback for our stylesheets (main and print stylesheet) being laoded with [loadCSS](https://github.com/filamentgroup/loadCSS/) AFTER the content has rendered (gotta love asynchronous CSS). So, if there will be no JavaScript, no developer will have to die that day.
 
-If you want the HTML5 shiv included or not is completely up to you and depends on how far back you want to support IE. If IE8 is an option, then you should keep it and add a separated IE8-only stylesheet to the game (ideally also inside the conditional comment with the Shiv). Optionally you could as well throw respond.js at IE8 and feed it media-queries the hard way, whereas this is a bit problematic when your IE8 user turned JavaScript off... but then he shouldn't be on the internet anyways, right? \*jk\*
+If you want the HTML5 shiv included or not is completely up to you and depends on how far back you want to support IE. If IE8 is an option, then you should keep it and add a separated IE8-only stylesheet to the game (ideally also inside the conditional comment with the Shiv). Optionally you could as well throw respond.js at IE8 and feed it media-queries the hard way, whereas this is a bit problematic when your IE8 user turned JavaScript off. Just thinking out loud here… progressive enhancement et al.
+
+You will find some scripts being added to the footer but they are minified. For the unminified version take a look inside the `unminified-js` directory. What they'll do: provide true asynchronous loading for your stylesheet(s) and polyfilling the [preload](https://www.smashingmagazine.com/2016/02/preload-what-is-it-good-for/) technique for non-supporting browsers.
