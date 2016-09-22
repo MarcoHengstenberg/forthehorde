@@ -27,14 +27,14 @@ module.exports = function(grunt) {
 					*/
 				},
 
-				src: ['unminified-html/*.html'] // check all HTML files in this directory
+				src: ['unminified-html/index-unminified.html'] // check all HTML files in this directory
 			}
 		},
 
 		// HTML Minification Block
 		htmlmin: {
 			// mumin stands for "MarkUp MINification"
-			mumin: {
+			htmlmin: {
 				options: {
 					collapseWhitespace: true, // yes, we want exactly that
 					preserveLineBreaks: true, // safety first, can be removed later
@@ -43,7 +43,7 @@ module.exports = function(grunt) {
 				},
 
 				files: {
-					'unminified-html/*.html' : '*.html' // minify HTML files in this directory and place them in the root
+					'index.html': 'unminified-html/index-unminified.html' // minify HTML files in this directory and place them in the root
 				}
 			}
 		},
@@ -204,14 +204,14 @@ module.exports = function(grunt) {
 				livereload: true,
 			},
 
-			html: {
+			htmlhint: {
 				files: ['unminified-html/*.html'], // watch all html-files for changes
 				tasks: ['htmlhint'] // when changes -> do lint
 			},
 
-			mumin: {
+			htmlmin: {
 				files: ['unminified-html/*.html'], // watch all html-files for changes
-				tasks: ['mumin'] // when changes -> do minify
+				tasks: ['htmlmin'] // when changes -> do minify
 			},
 
 			atf: {
@@ -252,7 +252,7 @@ module.exports = function(grunt) {
 	});
 
 	grunt.registerTask('default', []);
-	grunt.registerTask('mumin', ['htmlmin']);
+	grunt.registerTask('html-processing', ['htmlhint', 'htmlmin']);
 	grunt.registerTask('lessy-atf', ['less:atf', 'postcss']);
 	grunt.registerTask('lessy-main', ['less:main', 'postcss']);
 	grunt.registerTask('lessy-print', ['less:print', 'postcss']);
