@@ -1,0 +1,212 @@
+<!DOCTYPE html>
+<html>
+
+  <head>
+    <meta charset='utf-8'>
+    <meta http-equiv="X-UA-Compatible" content="chrome=1">
+    <meta name="description" content="Forthehorde : My Grunt being setup for frontend development">
+
+    <link rel="stylesheet" type="text/css" media="screen" href="stylesheets/stylesheet.css">
+
+    <title>Forthehorde</title>
+  </head>
+
+  <body>
+
+    <!-- HEADER -->
+    <div id="header_wrap" class="outer">
+        <header class="inner">
+          <a id="forkme_banner" href="https://github.com/MarcoHengstenberg/forthehorde">View on GitHub</a>
+
+          <h1 id="project_title">Forthehorde</h1>
+          <h2 id="project_tagline">My Grunt being setup for frontend development</h2>
+
+            <section id="downloads">
+              <a class="zip_download_link" href="https://github.com/MarcoHengstenberg/forthehorde/zipball/master">Download this project as a .zip file</a>
+              <a class="tar_download_link" href="https://github.com/MarcoHengstenberg/forthehorde/tarball/master">Download this project as a tar.gz file</a>
+            </section>
+        </header>
+    </div>
+
+    <!-- MAIN CONTENT -->
+    <div id="main_content_wrap" class="outer">
+      <section id="main_content" class="inner">
+        <p>First of all: Feel free to open issues, ask questions and tinker with the code to your likes.</p>
+
+<p>May this repo be useful for each and everyone around the world. I have commented on as much as possible and as little as I hope was needed to keep the files from being a comment-mess with no real content.</p>
+
+<p>The name "For the horde" stems from the basic orcish fighting unit in Warcraft 3, screaming upon the attack command being given:"<a href="https://youtu.be/yswGnzDazdY?t=14s">FOR THE HORDE!</a>". As it is, this unit is named "<a href="http://classic.battle.net/war3/orc/units/grunt.shtml">Grunt</a>".</p>
+
+<h2>
+<a id="how-to-use" class="anchor" href="#how-to-use" aria-hidden="true"><span aria-hidden="true" class="octicon octicon-link"></span></a>How to use</h2>
+
+<p>Clone this repository to your computer (or fork first, then clone) and run <code>npm install</code> after cd'ing into the directory created. It will create the node_modules directory and install all needed tasks for the grunt workflow to commence.</p>
+
+<p>When looking through the gruntfile and any other assets around the project repo, you'll run into the word <code>projectname</code> pretty often. This is thought to be a placeholder for whatever the project you're working on may be, so feel free to replace it with any word you come up with – or what the project at hand suggests.</p>
+
+<p>As there's <strong>no license</strong>, there's also <strong>no warranty</strong>, <strong>no support</strong> (apart from me answering questions whenever I can), <strong>no money</strong> involved and whatever you do, <strong>handle with care</strong>. I'm not perfect and while all of this works for me, it might not for you without changing things</p>
+
+<h2>
+<a id="changelog" class="anchor" href="#changelog" aria-hidden="true"><span aria-hidden="true" class="octicon octicon-link"></span></a>Changelog</h2>
+
+<p><strong>Update (19.09.2016):</strong> After adjusting here and there, the ServiceWorker is now working. Heureka. Just make sure to use it with care and learn <em>how</em> to use it before deploying it. There are a ton of resources on the matter; have some I can recommend:</p>
+
+<ul>
+<li><a href="https://github.com/lyzadanger/pragmatist-service-worker">Lyza Danger Gardner's pragmatist Service Worker</a></li>
+<li><a href="https://www.smashingmagazine.com/2016/02/making-a-service-worker/">Lyza's Case-Study on Service Worker</a></li>
+<li><a href="https://serviceworke.rs/">Serviceworke.rs by Mozilla and contributors</a></li>
+<li><a href="https://jakearchibald.com/">Jake Archibald's blog is a goldmine</a></li>
+<li><a href="https://www.udacity.com/course/offline-web-applications--ud899">Free Udacity Course by and with Jake Archibald</a></li>
+<li><a href="http://www.html5rocks.com/en/tutorials/service-worker/introduction/">HTML5 Rocks Introduction to ServiceWorkers (Outdated but good for a starting point)</a></li>
+</ul>
+
+<p>I also added the loadCSS script and the <a href="https://www.smashingmagazine.com/2016/02/preload-what-is-it-good-for/">preload</a> polyfill to the unminified <code>index.html</code> file. As I'll be using preload anyways, I will add in the polyfill and loadCSS no matter what.</p>
+
+<p>While being on the matter of updating I kicked good ol' autoprefixer and replaced it with postCSS and its plugins "autoprefixer" and "cssnano". Setup is done with. By doing so I got rid of the CSSlinting task for now. I didn't see the point apart from telling others how I write my CSS in a pretty obtrusive way: as soon as you diverged from my favorite CSS syntax, you'd get an error in Terminal… didn't feel quite right. I'll have to think of something else.</p>
+
+<p>As I added in a few scripts now, which I only need minified and not concatenated, I added an <code>ugly2production</code> task to the grunt workflow. That way all JS files in <code>uncompressed-js</code> have their whitespace trimmed (nothing else) and then be put directly into the <code>js</code> folder.</p>
+
+<p>––––</p>
+
+<p><strong>HUGE Update (16.09.2016):</strong> I added in a bit of my current knowledge about <a href="https://jakearchibald.github.io/isserviceworkerready/">Service Worker</a>. Will add any additional knowledge as soon as it hits my brain and got digested. Please don't take it as it is right now, as it will not work as you might expect it to.</p>
+
+<p>Just so you know what is what:</p>
+
+<ul>
+<li>peon.js: this is the serviceworker, named after <a href="http://classic.battle.net/war3/orc/units/peon.shtml">the orcish worker-unit</a> in Warcraft</li>
+<li>cachefiles.json: list of files to be cached by the serviceworker</li>
+<li>manifest.json: provides meta-data about the project so it can be turned into a progressive web app</li>
+<li>uncompressed-js/peon-register.js: registerscript for the serviceworker</li>
+<li>uncompressed-js/peon-unregister.js: unregisterscript for the serviceworker (naming conventions are great, right?)</li>
+</ul>
+
+<p>So, how does the Serviceworker do its magic? Content updates will be recognized as the worker looks over the network for content updates first and then goes to the cache storage. Images and other assets will require the worker to be updated or the version of the asset to be bumped. If all goes wrong we'll deliver the offline page and contents we defined (if we did so).</p>
+
+<p>Also I added in a polyfill for the <code>rel="preload"</code> link tag so older browsers understand what's going on here. On top of that I added loadCSS, onloadCSS and loadJS in order to have all asynchronously loaded assets for my project.</p>
+
+<p>Nextup: cleanup, further setup of the serviceworker et al, updating the gruntfile and package.json</p>
+
+<p>––––</p>
+
+<p><strong>Update (31.05.2016):</strong> End of May 2016 already and all I got is a tiny update on "Resource Hinting" in the <code>&lt;head&gt;</code> section of my HTML file. Yet, what an update it is indeed. <code>preload</code> landed browser support and the one for <code>preconnect</code> got much better than the last time I checked. Also removed the part with <code>subresource</code> as it might come in handy at some point but I haven't found it yet.</p>
+
+<p><strong>Update (16.10.2015):</strong> I added some placeholder <code>&lt;link&gt;</code> elements in the <code>&lt;head&gt;</code> section of my unminified HTML file with different <em>rel-attributes</em> on them. I'll explain in the comments next to those <code>&lt;link&gt;</code> elements what they do and why it's helpful to have them and how not to overdo it with those. As there's only so much space, here's a link to a <a href="https://docs.google.com/presentation/d/18zlAdKAxnc51y_kj-6sWLmnjl6TLnaru_WH0LJTjP-o/present#slide=id.p19">Slidedeck</a> by <a href="https://github.com/igrigorik">Ilya Grigorik</a> explaining the whole concept in more detail.</p>
+
+<p><strong>Update (04.05.2015):</strong> Got rid of unneeded projectfiles, which will be generated as soon as one is working with this Grunt setup. I also <del>added jshint to the workflow and</del> enhanced the uglify task with a beautify task, so I can have both mangled and compressed production-ready files but also beautified JavaScript for debugging purposes. Realized I forgot about some commas and added them as well. Mea Culpa.</p>
+
+<p>After killing different files some folders remained empty thus I added a few `.gitkeep files in there. Kill them or leave them or gitignore them – whatever suits you best.</p>
+
+<p><del>The <code>.jshintignore</code> file ignores all node_modules.</del> <ins>jshinting went out the window.</ins></p>
+
+<p>Lowered the compression level for pngquant. Will have to think of a better option to work on PNG files or may be completely switch to a different Plug-In (TinyPNG looks promising).</p>
+
+<p>I hope I was able to fix a few bugs without introducing new ones.</p>
+
+<p><strong>Update (24.02.2015):</strong> Had to take care of my indentation and also of the generated index.html file being filled. Makes more sense to leave that empty and to only write stuff in the HTML files inside the *<em>unminified-html</em> folder.</p>
+
+<p><strong>Update (24.09.2014):</strong> While I was already on it I added two new tasks to the Grunt workflow and a new dotfile entered the arena as well. Check it out. May it be useful to you.</p>
+
+<p><strong>Update (23.09.2014):</strong> As I have not come around updating the repo until yesterday since my last deploy in... errr... well... long ago... I have to update the readme, now, as well.</p>
+
+<p>––––</p>
+
+<h3>
+<a id="whats-in-this-for-me" class="anchor" href="#whats-in-this-for-me" aria-hidden="true"><span aria-hidden="true" class="octicon octicon-link"></span></a>What's in this for me</h3>
+
+<p><strong>Table of Contents:</strong></p>
+
+<ul>
+<li><a href="#grunt">Grunt</a></li>
+<li><a href="#lesstocss">LESStoCSS Workflow</a></li>
+<li><a href="#javascript-workflow">Javascript Workflow</a></li>
+<li><a href="#image-compression">Image Compression</a></li>
+<li><a href="#the-indexhtml">The Index.html</a></li>
+</ul>
+
+<h3>
+<a id="grunt" class="anchor" href="#grunt" aria-hidden="true"><span aria-hidden="true" class="octicon octicon-link"></span></a>Grunt</h3>
+
+<p>I'm using <em><a href="http://gruntjs.com">Grunt</a></em> with the following tasks:</p>
+
+<ul>
+<li><a href="https://github.com/yaniswang/grunt-htmlhint">htmlhint</a></li>
+<li><a href="https://github.com/gruntjs/grunt-contrib-htmlmin">htmlmin</a></li>
+<li><a href="https://github.com/gruntjs/grunt-contrib-less">less</a></li>
+<li><a href="https://github.com/nDmitry/grunt-postcss">postcss</a></li>
+<li><a href="https://github.com/gruntjs/grunt-contrib-concat">concat</a></li>
+<li><a href="https://github.com/gruntjs/grunt-contrib-uglify">uglify</a></li>
+<li><a href="https://github.com/gruntjs/grunt-contrib-imagemin">imagemin</a></li>
+<li><a href="https://github.com/gruntjs/grunt-contrib-watch">watch</a></li>
+</ul>
+
+<h3>
+<a id="lesstocss" class="anchor" href="#lesstocss" aria-hidden="true"><span aria-hidden="true" class="octicon octicon-link"></span></a>LESStoCSS</h3>
+
+<p>Here my (new) workflow for working with less:</p>
+
+<p>I separated the critical CSS from the main stylesheet and also extracted the print-styles from it, too. As I did that manually before, I thought I'd come up with a new setup, hence the update yesterday (22.09.2014).</p>
+
+<ol>
+<li>Inside the <code>less</code> directory are three directories, where each is related to a different stylesheet. <code>atf</code> is short for <em>"above-the-fold"</em> and contains all less files connected with the critical CSS part of my website, which is the inlined in the head section of the html file. <code>main</code> contains all less files for our main stylesheet, which will be loaded after the content has rendered. <code>print</code>, as the name suggests it, contains all files for the print stylesheet (also being loaded after the page is done loading). The fourth folder contains files being distributed to all three stylesheets. There we have our variables and mixins set up in order to use them in the other stylesheet. Currently there are only three files but may be you have even better ideas what to do inside that folder. <code>variables.less</code> is by its name pretty straight-forward: put color-, length- and other variables in there you want to use later on or do math with or whatever suits you best (and if you don't want to use it, cool, kick it). <code>general-mixins.less</code> could contain prefixed stuff but as we're taking care of that with autoprefixer (and grunt) you might have to think of other use-cases; I'm sure you'll find some or can think of at least something. <code>font-mixins.less</code> exists as I like to separate font-stuff from my other assets slightly but that's also something very personal, it's up to you if you want to go down that road with me.</li>
+<li>All LESS-files have <code>-projectname.less</code> as an ending, with a suffix to separate them related to their purpose. <code>-projectname-atf.less</code> for <em>above-the-fold</em> styles, <code>-projectname-main.less</code> for the main stylesheet and <code>-projectname-print.less</code> for, quelle surprise, the print styles.</li>
+<li>I create unminified and unprefixed <code>projectname-suffix.css</code> files inside the LESS-folder for each of the three stylesheets</li>
+<li>Then I run <em>postCSS</em> with its autoprefixer plugin (which saves me from writing mixins for vendor-prefix madness and a few kilobytes here and there as I only support browsers 3 versions back and those with at least 1% market-share) and add all prefixes to <code>projectname-suffix.css</code> and push them into the CSS folder</li>
+<li>Finally the minified <code>projectname.suffix.min.css</code> files are created by cssnano (another plugin of postCSS) inside the <code>css</code> directory</li>
+</ol>
+
+<p>The good thing here comes with the <em>watch-task</em> making every saved change into a working development file and a minified production version of it.</p>
+
+<p>In case you were to prefer <a href="https://github.com/gruntjs/grunt-contrib-sass">Sass</a> or <a href="https://github.com/gruntjs/grunt-contrib-stylus">Stylus</a>, then go ahead and kill anything LESS-related and create your own setup with one of the other preprocessors/postprocessors.</p>
+
+<h3>
+<a id="javascript-workflow" class="anchor" href="#javascript-workflow" aria-hidden="true"><span aria-hidden="true" class="octicon octicon-link"></span></a>Javascript Workflow</h3>
+
+<p>Here comes the Javascript Workflow:</p>
+
+<ol>
+<li>All Javascript files go into the <code>uncompressed-js</code> directory, uncompressed, unminified, ideally documented and commented and explained and whatever you should do in terms of <em>"This file does this and that because"</em>
+</li>
+<li>They are then taken, concatenated and placed as <code>projectname.js</code> inside the <code>concatenated</code> directory</li>
+<li>Following up comes the uglify task and creates <code>projectname.min.js</code> inside the <code>js</code> folder</li>
+<li>Parallely they are concatenated and beautified and put in the <code>concatenated/beauty/</code> folder</li>
+<li>Also there's a second uglify task (<code>uglify2production</code>) now, taking the separate files and trimming their whitespace before putting them into the production (<code>js</code>) folder without any concatenation going on.</li>
+</ol>
+
+<p>Again, I'm only saving changes to the js-files inside <code>uncompressed-js</code> and let the <em>watch-task</em> do the hard work.</p>
+
+<h3>
+<a id="image-compression" class="anchor" href="#image-compression" aria-hidden="true"><span aria-hidden="true" class="octicon octicon-link"></span></a>Image Compression</h3>
+
+<p>That is quite an easy workflow. Place some PNG or JPEG file into the <code>raw</code> directory and the imagemin task will create a crunched version of the image inside the <code>images</code> directory.</p>
+
+<p>This is handled by the <em>watch-task</em> as well, yet with one caveat: You will need to have at least on image inside the <code>raw</code> folder when using the imagemin task as a standalone tool. In the case of this project this rule can be ignored as the watch task has enough other stuff it can take a look after.</p>
+
+<h3>
+<a id="the-indexhtml" class="anchor" href="#the-indexhtml" aria-hidden="true"><span aria-hidden="true" class="octicon octicon-link"></span></a>The index.html</h3>
+
+<p><strong>What's first, first:</strong> Find the unminified version inside the <code>unminified-html</code> directory.</p>
+
+<p><strong>Apart from that:</strong> This file is really only for me myself and I. Whether you might want to use it is completely up to you. Take a look around the head-section to see what's in there for you.</p>
+
+<p>What should be noted is the part in the head section concerning the infamous favicon. Jonathan T. Neal pointed out in a <a href="http://www.jonathantneal.com/blog/understand-the-favicon/">blogpost</a> how <a href="https://twitter.com/nice2meatu/status/514045061425020928">incredibly awesome</a> (not) the favicon actually is. So, after reading his article about this matter I included his suggested way of cross-browser support for a favicon while maintaining a larger PNG version for retina-displays.</p>
+
+<p>Another important note: I added a <code>&lt;noscript&gt;</code> to the head section as a fallback for our stylesheets (main and print stylesheet) being laoded with <a href="https://github.com/filamentgroup/loadCSS/">loadCSS</a> AFTER the content has rendered (gotta love asynchronous CSS). So, if there will be no JavaScript, no developer will have to die that day.</p>
+
+<p>If you want the HTML5 shiv included or not is completely up to you and depends on how far back you want to support IE. If IE8 is an option, then you should keep it and add a separated IE8-only stylesheet to the game (ideally also inside the conditional comment with the Shiv). Optionally you could as well throw respond.js at IE8 and feed it media-queries the hard way, whereas this is a bit problematic when your IE8 user turned JavaScript off. Just thinking out loud here… progressive enhancement et al.</p>
+
+<p>You will find some scripts being added to the footer but they are minified. For the unminified version take a look inside the <code>unminified-js</code> directory. What they'll do: provide true asynchronous loading for your stylesheet(s) and polyfilling the <a href="https://www.smashingmagazine.com/2016/02/preload-what-is-it-good-for/">preload</a> technique for non-supporting browsers.</p>
+      </section>
+    </div>
+
+    <!-- FOOTER  -->
+    <div id="footer_wrap" class="outer">
+      <footer class="inner">
+        <p class="copyright">Forthehorde maintained by <a href="https://github.com/MarcoHengstenberg">MarcoHengstenberg</a></p>
+        <p>Published with <a href="https://pages.github.com">GitHub Pages</a></p>
+      </footer>
+    </div>
+
+    
+
+  </body>
+</html>
