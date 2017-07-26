@@ -36,7 +36,7 @@ try {
  * service worker to update its registrations (causing reinstallation). Changing
  * this value will result in all caches being deleted.
  **/
-const CACHE_Name = 'projectname-0.0.1';
+const CACHE_NAME = 'projectname-0.0.1';
 
 // Create the scope under which the worker will run (mostly root)
 const scope = '/'
