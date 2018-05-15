@@ -8,17 +8,17 @@
   "license": "gotnolicense",
   "private": "true",
   "devDependencies": {
-  	"grunt"									: "~0.4.0",
-    "grunt-contrib-htmlmin"	: "*",
-    "grunt-htmlhint"				: "*",
-    "grunt-contrib-less"		: "*",
-    "grunt-postcss"					: "*",
-    "autoprefixer"					: "*",
-    "cssnano"								: "*",
-    "grunt-contrib-concat"	: "*",
-    "grunt-contrib-uglify"	: "*",
-    "grunt-contrib-imagemin": "*",
-    "grunt-contrib-watch"		: "*",
-    "matchdep": "*"
+    "autoprefixer": "^8.5.0",
+    "cssnano": "^3.10.0",
+    "grunt": "~0.4.0",
+    "grunt-contrib-concat": "*",
+    "grunt-contrib-htmlmin": "^2.4.0",
+    "grunt-contrib-imagemin": "^2.0.1",
+    "grunt-contrib-less": "^1.4.1",
+    "grunt-contrib-uglify": "^3.3.0",
+    "grunt-contrib-watch": "^1.1.0",
+    "grunt-htmlhint": "*",
+    "grunt-postcss": "^0.9.0",
+    "matchdep": "^2.0.0"
   }
 }
