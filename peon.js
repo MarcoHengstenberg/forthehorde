@@ -60,7 +60,7 @@ function offlineImage () {
   + '<path fill="#fff" d="M0 0h400v300H0z"/>'
   + '<text fill="#e53b2c" font-family="Times New Roman,Times,serif"'
   + ' font-size="72" font-weight="bold">'
-  + '<tspan x="93" y="172">offline</tspan></text></g></svg>';
+  + '<tspan x="93" y="172">Someone is offline. Is it you or us?</tspan></text></g></svg>';
   return new Response(offlineSVG,
     { headers: { 'Content-Type': 'image/svg+xml' } }
   );

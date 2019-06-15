@@ -9,11 +9,11 @@ The name "For the horde" stems from the basic orcish fighting unit in Warcraft 3
 
 ## How to use
 
-Clone this repository to your computer (or fork first, then clone) and run `npm install` after cd'ing into the directory created. It will create the node_modules directory and install all needed tasks for the grunt workflow to commence.
+Clone this repository to your computer (or fork first, then clone) and run `npm install` after cd'ing into the directory created. The command will then create the `node_modules` directory and install all needed tasks for the grunt workflow to commence.
 
-When looking through the gruntfile and any other assets around the project repo, you'll run into the word `projectname` pretty often. This is thought to be a placeholder for whatever the project you're working on may be, so feel free to replace it with any word you come up with – or what the project at hand suggests.
+When looking through the gruntfile and any other assets around the project repo, you'll run into the word `projectname` pretty often. This is thought to be a placeholder for whatever the project you're working on may be. Feel free to replace it with any word you come up with – or what the project at hand suggests.
 
-As there's **no license**, there's also **no warranty**, **no support** (apart from me answering questions whenever I can), **no money** involved and whatever you do, **handle with care**. I'm not perfect and while all of this works for me, it might not for you without changing things
+As there's **no license**, there's also **no warranty**, **no support** (apart from me answering questions whenever I can), **no money** involved and whatever you do, **handle with care**. I'm not perfect and while all of this works for me, it may not work for you.
 
 ## Changelog
 
